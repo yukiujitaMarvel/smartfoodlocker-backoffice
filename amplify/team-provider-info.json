@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smartfoodlockermanag-dev-160130-authRole",
+      "UnauthRoleArn": "arn:aws:iam::701165139405:role/amplify-smartfoodlockermanag-dev-160130-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::701165139405:role/amplify-smartfoodlockermanag-dev-160130-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-smartfoodlockermanag-dev-160130-deployment",
+      "UnauthRoleName": "amplify-smartfoodlockermanag-dev-160130-unauthRole",
+      "StackName": "amplify-smartfoodlockermanag-dev-160130",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:701165139405:stack/amplify-smartfoodlockermanag-dev-160130/d0806a90-f066-11ec-832b-0a293f9ab489",
+      "AmplifyAppId": "d3dk0495979wpw"
+    },
+    "categories": {
+      "auth": {
+        "smartfoodlockermanaga10e1ac1": {}
+      }
+    }
+  }
+}

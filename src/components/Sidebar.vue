@@ -1,0 +1,68 @@
+<template>
+  <v-card>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant.sync="mini"
+      permanent
+    >
+      <v-list-item class="px-2">
+        <v-list-item-avatar>
+          <v-icon>mdi-home-city</v-icon>
+        </v-list-item-avatar>
+
+        <v-list-item-title>Smart food locker</v-list-item-title>
+
+        <v-btn
+          icon
+          @click.stop="mini = !mini"
+        >
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+  </v-card>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        drawer: true,
+        items: [
+          { title: '注文状況一覧', icon: 'mdi-cart' },
+          { title: '商品一覧', icon: 'mdi-order-bool-descending' },
+          { title: '売上・顧客管理表', icon: 'mdi-account-group-outline' },
+          { title: '各種出力', icon: 'mdi-cloud-download' },
+          { title: '休日管理', icon: 'mdi-clock-outline' },
+          { title: '設定', icon: 'mdi-cog-outline' },
+        ],
+        mini: true,
+      }
+    },
+  }
+</script>
+
+<style scoped>
+.v-navigation-drawer{
+  background-color: #EA5303 !important;
+}
+
+</style>
