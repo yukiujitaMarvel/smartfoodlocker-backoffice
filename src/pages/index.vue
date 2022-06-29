@@ -139,6 +139,8 @@
 
 <script>
 import Sidebar from '~/components/Sidebar'
+import '~/assets/css/style.css'
+
   export default {
     
    
@@ -230,32 +232,3 @@ import Sidebar from '~/components/Sidebar'
   }
 </script>
 
-<style>
-.v-main__wrap{
-  width: 100%;
-  height: 100vh;
-}
-.display-wrap{
-  display: flex;
-  height: 100%;
-}
-.right-wrap{
-  width: 100%;
-  height: 100%;
-  background-color: white !important;
-}
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 0 ;
-}
-.fill-height{
-  height: none;
-}
-
-@media screen and (min-width:1264px) {
-  .container {
-    max-width: none;
-  }
-}
-</style>
