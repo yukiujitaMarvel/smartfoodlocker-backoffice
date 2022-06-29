@@ -82,7 +82,7 @@
   padding-bottom: 10px;
 }
 .v-list-item__title {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 </style>
