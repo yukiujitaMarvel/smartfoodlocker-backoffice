@@ -17,6 +17,21 @@
                 single-line
                 hide-details
               ></v-text-field>
+
+              <div class="my-2" style="margin-left:10px;">
+                <v-btn
+                  color="warning"
+                  dark
+                >
+                  <v-icon
+                    middle
+                    color="white"
+                  >
+                    mdi-export-variant
+                  </v-icon>
+                  PDF出力
+                </v-btn>
+              </div>
             </v-card-title>
             <v-data-table
               :headers="headers"
@@ -108,7 +123,7 @@ import '~/assets/css/style.css'
   padding: 10px;
 }
 .order-title h1{
-  font-size: 18px;
+  font-size: 20px;
 }
 .order-title p{
   font-size: 14px;
