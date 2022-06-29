@@ -61,13 +61,13 @@
                 </template>
                 <v-list>
                   <v-list-item @click="type = 'day'">
-                    <v-list-item-title>Day</v-list-item-title>
+                    <v-list-item-title>日</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = 'week'">
-                    <v-list-item-title>Week</v-list-item-title>
+                    <v-list-item-title>週</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = 'month'">
-                    <v-list-item-title>Month</v-list-item-title>
+                    <v-list-item-title>月</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="type = '4day'">
                     <v-list-item-title>4 days</v-list-item-title>
@@ -231,13 +231,31 @@ import Sidebar from '~/components/Sidebar'
 </script>
 
 <style>
+.v-main__wrap{
+  width: 100%;
+  height: 100vh;
+}
 .display-wrap{
   display: flex;
+  height: 100%;
 }
 .right-wrap{
   width: 100%;
+  height: 100%;
   background-color: white !important;
-
+}
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0 ;
+}
+.fill-height{
+  height: none;
 }
 
+@media screen and (min-width:1264px) {
+  .container {
+    max-width: none;
+  }
+}
 </style>

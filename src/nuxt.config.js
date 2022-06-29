@@ -6,10 +6,10 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - smartfoodlocker-managiment',
-    title: 'smartfoodlocker-managiment',
+    // titleTemplate: '%s - smartfoodlocker-managiment',
+    title: 'smartfoodlocker管理画面',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -56,7 +56,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

@@ -64,5 +64,25 @@
 .v-navigation-drawer{
   background-color: #EA5303 !important;
 }
+.v-sheet.v-card {
+  border-radius: 0px;
+}
+.v-card .v-sheet .theme--light{
+  color: white;
+  font-weight: bold;
+}
+.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
+  color: white;
+  font-weight: bold;
+}
+.v-icon.v-icon {
+  color: white;
+}
+.v-list-item {
+  padding-bottom: 10px;
+}
+.v-list-item__title {
+  font-weight: bold;
+}
 
 </style>
