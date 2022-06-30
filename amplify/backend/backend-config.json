@@ -1,6 +1,6 @@
 {
   "auth": {
-    "smartfoodlockermanaga10e1ac1": {
+    "smartfoodlockerbacko55a3bbff": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
