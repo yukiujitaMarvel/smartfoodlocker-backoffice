@@ -6,18 +6,20 @@
       permanent
     >
       <v-list-item class="px-2">
-        <v-list-item-avatar>
-          <v-icon>mdi-locker-multiple</v-icon>
-        </v-list-item-avatar>
+          <v-list-item-avatar>
+            <a href="/">
+              <v-icon>mdi-locker-multiple</v-icon>
+            </a>
+          </v-list-item-avatar>
 
-        <v-list-item-title>Smart food locker</v-list-item-title>
+          <v-list-item-title>Smart food locker</v-list-item-title>
 
-        <v-btn
-          icon
-          @click.stop="mini = !mini"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
+          <v-btn
+            icon
+            @click.stop="mini = !mini"
+          >
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
       </v-list-item>
 
       <v-divider></v-divider>
@@ -82,6 +84,9 @@
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .v-navigation-drawer{
   background-color: #EA5303 !important;
 }
