@@ -53,7 +53,20 @@
                         class="ma-0 pa-0"
                 ></v-img>
             </template>
-            </v-data-table>
+
+            
+
+            <template v-slot:[`item.actions`]="{ item }">
+              <v-icon
+                nomal
+                @click="edit(item)"
+              >
+                mdi-dots-vertical
+              </v-icon>
+            </template>
+
+            
+          </v-data-table>
           </v-card>
         </v-col>
       </v-row>
@@ -87,7 +100,7 @@ import '~/assets/css/style.css'
           { text: '商品名', value: 'item_name' },
           { text: '値段(税込み)', value: 'item_price' },
           { text: '備考', value: 'remarks' },
-          { text: '操作', value: 'operation' },
+          { text: '操作', value: 'actions' },
         ],
         desserts: [
           {
@@ -127,6 +140,11 @@ import '~/assets/css/style.css'
         ],
       }
     },
+    methods: {
+      edit(item) {
+        console.log(item.name);
+      },
+    }
   }
 </script>
 

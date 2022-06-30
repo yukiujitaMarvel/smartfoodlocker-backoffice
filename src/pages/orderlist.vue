@@ -37,7 +37,16 @@
               :headers="headers"
               :items="desserts"
               :search="search"
-            ></v-data-table>
+            >
+            <template v-slot:[`item.actions`]="{ item }">
+              <v-icon
+                nomal
+                @click="edit(item)"
+              >
+                mdi-dots-vertical
+              </v-icon>
+            </template>
+            </v-data-table>
           </v-card>
         </v-col>
       </v-row>
@@ -68,7 +77,7 @@ import '~/assets/css/style.css'
           { text: '商品数', value: 'item_num' },
           { text: '注文詳細', value: 'order_detail' },
           { text: 'ステータス', value: 'status' },
-          { text: '操作', value: 'operation' },
+          { text: '操作', value: 'actions' },
         ],
         desserts: [
           {
@@ -80,7 +89,7 @@ import '~/assets/css/style.css'
             status: '準備中',
           },
           {
-            name: '31-0007',
+            name: '31-0006',
             order_date: '2023-10-31 10:30',
             user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
             item_num: 2,
@@ -88,7 +97,7 @@ import '~/assets/css/style.css'
             status: '準備中',
           },
           {
-            name: '31-0007',
+            name: '31-0005',
             order_date: '2023-10-31 10:30',
             user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
             item_num: 2,
@@ -96,7 +105,7 @@ import '~/assets/css/style.css'
             status: '準備中',
           },
           {
-            name: '31-0007',
+            name: '31-0004',
             order_date: '2023-10-31 10:30',
             user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
             item_num: 2,
@@ -104,7 +113,7 @@ import '~/assets/css/style.css'
             status: '準備中',
           },
           {
-            name: '31-0007',
+            name: '31-0003',
             order_date: '2023-10-31 10:30',
             user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
             item_num: 2,
@@ -115,6 +124,11 @@ import '~/assets/css/style.css'
         ],
       }
     },
+    methods: {
+      edit(item) {
+        console.log(item.name)
+      }
+    }
   }
 </script>
 
