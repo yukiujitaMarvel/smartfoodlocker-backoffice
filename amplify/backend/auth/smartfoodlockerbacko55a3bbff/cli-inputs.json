@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "smartfoodlockermanaga10e1ac1_identitypool_a10e1ac1",
+    "identityPoolName": "smartfoodlockerbacko55a3bbff_identitypool_55a3bbff",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "smartfa10e1ac1",
-    "userPoolName": "smartfoodlockermanaga10e1ac1_userpool_a10e1ac1",
+    "resourceNameTruncated": "smartf55a3bbff",
+    "userPoolName": "smartfoodlockerbacko55a3bbff_userpool_55a3bbff",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "smartfa10e1ac1_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "smartf55a3bbff_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a10e1ac1",
-    "resourceName": "smartfoodlockermanaga10e1ac1",
+    "sharedId": "55a3bbff",
+    "resourceName": "smartfoodlockerbacko55a3bbff",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "userPoolGroupList": [],
