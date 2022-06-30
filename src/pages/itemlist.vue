@@ -33,11 +33,25 @@
               </div>
 
             </v-card-title>
+            
             <v-data-table
               :headers="headers"
               :items="desserts"
-              :search="search"
-            ></v-data-table>
+              :items-per-page="5"
+              class="elevation-1 my-3 mx-auto"
+            >
+            <!-- サムネイル -->
+            <template v-slot:[`item.item_img`]="{ item }">
+                <v-img :src="item.item_img" 
+                        :aspect-ratop="16/9" 
+                        height="7vw" 
+                        min-height="100px"
+                        width="7vw" 
+                        min-width="100px" 
+                        class="ma-0 pa-0"
+                ></v-img>
+            </template>
+            </v-data-table>
           </v-card>
         </v-col>
       </v-row>
@@ -73,7 +87,7 @@ import '~/assets/css/style.css'
         desserts: [
           {
             name: 'p-6768',
-            item_img: 'img',
+            item_img: require('@/assets/img/yakiniku.png'),
             category: '弁当',
             item_name: '焼肉弁当',
             item_price: '600円',
@@ -81,7 +95,7 @@ import '~/assets/css/style.css'
           },
           {
             name: 'p-6767',
-            item_img: 'img',
+            item_img: require('@/assets/img/fish.png'),
             category: '弁当',
             item_name: '焼き魚弁当',
             item_price: '580円',
@@ -89,7 +103,7 @@ import '~/assets/css/style.css'
           },
           {
             name: 'p-6766',
-            item_img: 'img',
+            item_img: require('@/assets/img/egg.png'),
             category: '弁当',
             item_name: 'たまごサンド',
             item_price: '450円',
@@ -97,7 +111,7 @@ import '~/assets/css/style.css'
           },
           {
             name: 'p-6765',
-            item_img: 'img',
+            item_img: require('@/assets/img/soup.png'),
             category: '弁当',
             item_name: 'わかめスープ',
             item_price: '380円',
