@@ -80,6 +80,11 @@ import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
 
   export default {
+    head() {
+      return {
+        title: '商品一覧 | smartfoodlocker管理画面'
+      }
+    },
     components: {
       Sidebar,
       Modal

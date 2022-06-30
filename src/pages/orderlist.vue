@@ -59,6 +59,11 @@ import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 
   export default {
+    head() {
+      return {
+        title: '注文一覧 | smartfoodlocker管理画面'
+      }
+    },
     components: {
       Sidebar,
     },
