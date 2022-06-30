@@ -26,7 +26,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
-          link
+          :to="item.link"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -68,9 +68,9 @@
       return {
         drawer: true,
         items: [
-          { title: '注文状況一覧', icon: 'mdi-cart' },
-          { title: '商品一覧', icon: 'mdi-food-outline' },
-          { title: '売上・顧客管理表', icon: 'mdi-database-outline' },
+          { title: '注文状況一覧', icon: 'mdi-cart', link: '/orderlist' },
+          { title: '商品一覧', icon: 'mdi-food-outline', link: '/itemlist' },
+          { title: '売上・顧客管理表', icon: 'mdi-database-outline', link: '/users' },
           { title: '各種出力', icon: 'mdi-export-variant' },
           { title: '休日管理', icon: 'mdi-calendar-blank' },
           { title: '設定', icon: 'mdi-cog-outline' },
