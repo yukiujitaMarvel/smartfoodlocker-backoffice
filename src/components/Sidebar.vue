@@ -45,6 +45,18 @@
         <v-list-item class="px-2">
           <v-list-item-avatar></v-list-item-avatar>
           <v-list-item-title></v-list-item-title>
+          <div class="my-2">
+            <v-btn
+              color="warning"
+              dark
+            >
+              ログインはこちら
+            </v-btn>
+          </div>
+        </v-list-item>
+        <v-list-item class="px-2">
+          <v-list-item-avatar></v-list-item-avatar>
+          <v-list-item-title></v-list-item-title>
           <amplify-sign-out></amplify-sign-out>
         </v-list-item>
         <div class="conpany-inner-wrap">
@@ -123,6 +135,9 @@ a {
 }
 .conpany-inner-wrap .v-list-item__title{ 
   font-size: 12px;
+}
+.v-btn:not(.v-btn--round).v-size--default {
+  font-weight: bold !important;
 }
 
 </style>
