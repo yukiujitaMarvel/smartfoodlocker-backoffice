@@ -1,18 +1,25 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="left">
     <v-dialog
       v-model="dialog"
       width="600px"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Open Dialog
-        </v-btn>
+        <div class="add-btn">
+          <v-btn
+            class="mx-2"
+            fab
+            dark
+            v-bind="attrs"
+            v-on="on"
+            color="orange"
+          >
+            <v-icon dark>
+              mdi-plus
+            </v-icon>
+          </v-btn>
+        </div>
+        
       </template>
       <v-card>
         <v-card-title>
@@ -62,3 +69,12 @@
     },
   }
 </script>
+
+<style scoped>
+.v-btn--fab.v-size--default {
+  margin-left: 30px;
+}
+.add-btn{
+  margin: 20px;
+}
+</style>

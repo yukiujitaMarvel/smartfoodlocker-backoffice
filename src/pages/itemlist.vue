@@ -8,6 +8,8 @@
             <div class="order-title">
               <h1>商品一覧</h1>
             </div>
+            <Modal />
+            
             <v-card-title>
               <v-text-field
                 v-model="search"
@@ -61,14 +63,17 @@
 
 <script>
 import Sidebar from '~/components/Sidebar'
+import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
 
   export default {
     components: {
       Sidebar,
+      Modal
     },
     data () {
       return {
+        dialog: false,
         search: '',
         headers: [
           {
