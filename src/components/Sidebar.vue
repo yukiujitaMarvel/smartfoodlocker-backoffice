@@ -7,7 +7,7 @@
     >
       <v-list-item class="px-2">
         <v-list-item-avatar>
-          <v-icon>mdi-home-city</v-icon>
+          <v-icon>mdi-locker-multiple</v-icon>
         </v-list-item-avatar>
 
         <v-list-item-title>Smart food locker</v-list-item-title>
@@ -48,7 +48,7 @@
         <div class="conpany-inner-wrap">
           <v-list-item class="px-2">
             <v-list-item-avatar>
-              <v-icon>mdi-home-city</v-icon>
+              <v-icon>mdi-office-building</v-icon>
             </v-list-item-avatar>
             <v-list-item-title>コマジャパン株式会社</v-list-item-title>
             <v-btn icon>
@@ -69,10 +69,10 @@
         drawer: true,
         items: [
           { title: '注文状況一覧', icon: 'mdi-cart' },
-          { title: '商品一覧', icon: 'mdi-order-bool-descending' },
-          { title: '売上・顧客管理表', icon: 'mdi-account-group-outline' },
-          { title: '各種出力', icon: 'mdi-cloud-download' },
-          { title: '休日管理', icon: 'mdi-clock-outline' },
+          { title: '商品一覧', icon: 'mdi-food-outline' },
+          { title: '売上・顧客管理表', icon: 'mdi-database-outline' },
+          { title: '各種出力', icon: 'mdi-export-variant' },
+          { title: '休日管理', icon: 'mdi-calendar-blank' },
           { title: '設定', icon: 'mdi-cog-outline' },
         ],
         mini: true,
