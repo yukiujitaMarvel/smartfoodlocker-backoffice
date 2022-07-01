@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="left">
+  <v-row>
     <v-dialog
       v-model="dialog"
       width="600px"
@@ -19,15 +19,18 @@
             </v-icon>
           </v-btn>
         </div>
-        
       </template>
+
+
       <v-card>
         <v-card-title>
           <span class="text-h5">商品登録</span>
         </v-card-title>
+
         <v-card-text>
           <div>
             <v-text-field
+              v-model="item_name"
               label="商品名"
               :rules="rules"
               hide-details="auto"
@@ -39,7 +42,7 @@
             <v-row align="center">
               <!-- <v-col cols="12"> -->
                 <v-select
-                  v-model="value"
+                  v-model="category_id"
                   label="カテゴリ名"
                   :items="items"
                   item-text="name"
@@ -49,12 +52,12 @@
               <!-- </v-col> -->
             </v-row>
             <v-text-field
+              v-model="item_price"
               label="値段"
               :rules="rules"
               hide-details="auto"
             ></v-text-field>
           </div>
-          
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -62,33 +65,83 @@
             <v-btn
               color="warning"
               dark
+              @click="createItem"
             >
               商品を登録する
             </v-btn>
           </div>
         </v-card-actions>
       </v-card>
+
     </v-dialog>
   </v-row>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      dialog: false,
-      value: '',
-      items: [
-        {name:'弁当', value:'01'},
-        {name:'サンドイッチ', value:'02'},
-        {name:'サラダ', value:'03'},
-        {name:'スープ', value:'04'}
-      ],
-      rules: [
-        value => !!value || '必ず入力してください',
-      ],
-    }),
+import { API, graphqlOperation} from 'aws-amplify'
+import { createItems } from '../graphql/mutations'
+export default {
+  data: () => ({
+    dialog: false,
+    item_name: '',
+    category_id: '',
+    item_price: '',
+    item_id: '100',
     
+    create_at: "",
+    update_at: "",
+    value: '',
+    items: [
+      {name:'弁当', value:'01'},
+      {name:'サンドイッチ', value:'02'},
+      {name:'サラダ', value:'03'},
+      {name:'スープ', value:'04'}
+    ],
+    rules: [
+      value => !!value || '必ず入力してください',
+    ],
+  }),
+  created() {
+    this.createItemId();
+  },
+  methods: {
+    createItemId(){
+      var len = 4;
+      var str = "1234567890";
+      var strLen = str.length;
+      var result = "";
+      
+      for (var i = 0; i < len; i++) {
+        result += str[Math.floor(Math.random() * strLen)];
+      }
+
+      const createItemId = 'p-' + result
+      
+      this.item_id = createItemId
+      // console.log(createItemId);
+    },
+    async createItem() {
+      const addItem = {
+        item_id: this.item_id,
+        item_name: this.item_name,
+        category_id: this.category_id,
+        item_price: this.item_price
+      };
+      await API.graphql(graphqlOperation(createItems, {input: addItem}))
+      .then(response => {
+          console.log(response);
+          
+      }).catch(error => {
+          console.log(error)
+      });
+      setTimeout(() => {
+        let url = '/itemlist'
+        window.location.href = url
+      }, 1000)
+    },
   }
+  
+}
 </script>
 
 <style scoped>
