@@ -107,42 +107,7 @@ export default {
       value => !!value || '必ず入力してください',
     ],
   }),
-  // created() {
-  //   this.createItemId();
-  // },
   methods: {
-    // createItemId(){
-    //   var len = 4;
-    //   var str = "1234567890";
-    //   var strLen = str.length;
-    //   var result = "";
-      
-    //   for (var i = 0; i < len; i++) {
-    //     result += str[Math.floor(Math.random() * strLen)];
-    //   }
-
-    //   const createItemId = 'p-' + result
-      
-    //   this.item_id = createItemId
-    //   // console.log(createItemId);
-    // },
-    // confirmImage(event) {
-    //   this.message = ''
-    //   this.file = event.target.files[0]
-    //   if (!this.file.type.match('image.*')) {
-    //     this.message = '画像ファイルを選択して下さい'
-    //     this.confirmedImage = ''
-    //     return
-    //   }
-    //   this.createImage(this.file)
-    // },
-    // createImage(file) {
-    //   const reader = new FileReader()
-    //   reader.readAsDataURL(file)
-    //   reader.onload = (e) => {
-    //     this.confirmedImage = e.target.result
-    //   }
-    // },
     async createItem() {
       var len = 4;
       var str = "1234567890";
