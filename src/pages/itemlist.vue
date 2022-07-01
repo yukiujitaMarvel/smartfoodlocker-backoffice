@@ -150,7 +150,7 @@ export default {
 
 
     edit(item) {
-      console.log(item.name);
+      console.log(item.item_id);
     },
   }
 }
