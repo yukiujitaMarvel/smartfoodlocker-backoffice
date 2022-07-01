@@ -37,13 +37,16 @@
               accept="image/*"
             ></v-file-input>
             <v-row align="center">
-              <v-col cols="12">
+              <!-- <v-col cols="12"> -->
                 <v-select
+                  v-model="value"
+                  label="カテゴリ名"
                   :items="items"
-                  :menu-props="{ top: true, offsetY: true }"
-                  label="カテゴリ"
+                  item-text="name"
+                  item-value="value"
+                  required>
                 ></v-select>
-              </v-col>
+              <!-- </v-col> -->
             </v-row>
             <v-text-field
               label="値段"
@@ -73,7 +76,16 @@
   export default {
     data: () => ({
       dialog: false,
-      items: ['弁当', 'サンドイッチ', 'サラダ', 'スープ'],
+      value: '',
+      items: [
+        {name:'弁当', value:'01'},
+        {name:'サンドイッチ', value:'02'},
+        {name:'サラダ', value:'03'},
+        {name:'スープ', value:'04'}
+      ],
+      rules: [
+        value => !!value || '必ず入力してください',
+      ],
     }),
     
   }
