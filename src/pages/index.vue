@@ -140,6 +140,7 @@
 <script>
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
+import { Hub } from 'aws-amplify'
 
 export default {
   head() {
@@ -216,6 +217,12 @@ export default {
   components: {
     Sidebar,
   },
+   created() {
+    Hub.listen('auth', this.listener)
+  },
+  destroyed() {
+    Hub.remove('auth', this.listener)
+  },
   mounted () {
     this.$refs.calendar.checkChange()
   },
@@ -245,6 +252,11 @@ export default {
           el.children[6].classList.add('saturday')
         })
       }, 200)
+    },
+    listener(data){
+      if(data.payload.event == 'signOut') {
+        this.$router.push('/signin')
+      }
     }
     // showEvent ({ nativeEvent, event }) {
     //   const open = () => {
