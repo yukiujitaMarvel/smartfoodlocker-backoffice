@@ -42,32 +42,34 @@
       </v-list>
 
       <div class="conpany-wrap">
-        <v-list-item class="px-2">
-          <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title>
-          <div class="my-2">
-            <v-btn
-              color="warning"
-              dark
-            >
-              ログインはこちら
-            </v-btn>
-          </div>
-        </v-list-item>
-        <v-list-item class="px-2">
+        <v-list-item class="px-2" v-if="Object.keys(users).length">
           <v-list-item-avatar></v-list-item-avatar>
           <v-list-item-title></v-list-item-title>
           <amplify-sign-out></amplify-sign-out>
+        </v-list-item>
+        <v-list-item class="px-2" v-else>
+          <v-list-item-avatar></v-list-item-avatar>
+          <v-list-item-title></v-list-item-title>
+          <div class="my-2">
+            <a href="/signin">
+              <v-btn
+                color="warning"
+                dark
+              >
+                ログインはこちら
+              </v-btn>
+            </a>
+          </div>
         </v-list-item>
         <div class="conpany-inner-wrap">
           <v-list-item class="px-2">
             <v-list-item-avatar>
               <v-icon>mdi-office-building</v-icon>
             </v-list-item-avatar>
-            <v-list-item-title>コマジャパン株式会社</v-list-item-title>
-            <v-btn icon>
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
+            <v-list-item-title>{{ users.username }}</v-list-item-title>
+              <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
           </v-list-item>
         </div>
       </div>
@@ -77,6 +79,7 @@
 </template>
 
 <script>
+  import Auth from "@aws-amplify/auth";
   export default {
     data () {
       return {
@@ -90,7 +93,25 @@
           { title: '設定', icon: 'mdi-cog-outline' },
         ],
         mini: true,
+        users: {}
       }
+    },
+     async created() {
+    await this.getUser()
+    },
+    methods: {
+      async getUser() {
+        try {
+          await Auth.currentAuthenticatedUser()
+            .then((data) => {
+              if(data && data.signInUserSession) {
+                console.log(data)
+                this.users = data
+              }
+            })
+        } catch(e){
+        } 
+      },
     },
   }
 </script>
