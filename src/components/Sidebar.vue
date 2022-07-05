@@ -89,7 +89,7 @@
           { title: '商品一覧', icon: 'mdi-food-outline', link: '/itemlist' },
           { title: '売上・顧客管理表', icon: 'mdi-database-outline', link: '/users' },
           { title: '各種出力', icon: 'mdi-export-variant', link: '/export' },
-          { title: '休日管理', icon: 'mdi-calendar-blank' },
+          { title: '休日管理', icon: 'mdi-calendar-blank', link: '/holidayManager' },
           { title: '設定', icon: 'mdi-cog-outline' },
         ],
         mini: true,
