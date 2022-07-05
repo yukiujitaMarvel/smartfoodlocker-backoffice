@@ -66,10 +66,23 @@
               :items="num_items"
               label="数"
             ></v-select>
-            <!-- <div class="radio-group">
-              <input type="radio"  id="01" name="release" value="01" style="transform:scale(2.0); margin:10px;" checked="checked" v-model="release"><span style="font-size:12px;">公開</span>
-              <input type="radio" id="02" name="release" value="02" style="transform:scale(2.0); margin:10px;" v-model="release"><span style="font-size:12px;">非公開</span>
-            </div> -->
+            <v-container fluid>
+    
+    <v-radio-group
+      v-model="row"
+      row
+    >
+      <v-radio
+        label="Option 1"
+        value=false
+      ></v-radio>
+      <v-radio
+        label="Option 2"
+        value=true
+      ></v-radio>
+    </v-radio-group>
+
+  </v-container>
           </div>
         </v-card-text>
         <v-card-actions>
@@ -101,9 +114,8 @@ export default {
     return {
     dialog: false,
     switch1: true,
-    column: null,
     
-
+        row: '',
 
     item_id: '',
     item_name: '',
@@ -114,7 +126,7 @@ export default {
     item_price: '',
     num_items: numRange,
     item_stock: '',
-    // release: '',
+    release: '01',
 
     create_at: "",
     update_at: "",
@@ -166,7 +178,7 @@ export default {
         category_id: this.category_id,
         item_price: this.item_price,
         item_stock: this.item_stock,
-        // release: this.release
+        release: this.row
       };
       await API.graphql(graphqlOperation(createItems, {input: addItem}))
       .then(response => {
