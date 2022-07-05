@@ -68,21 +68,21 @@
             ></v-select>
             <v-container fluid>
     
-    <v-radio-group
-      v-model="row"
-      row
-    >
-      <v-radio
-        label="Option 1"
-        value=false
-      ></v-radio>
-      <v-radio
-        label="Option 2"
-        value=true
-      ></v-radio>
-    </v-radio-group>
+            <v-radio-group
+              v-model="release"
+              row
+            >
+              <v-radio
+                label="公開"
+                value=true
+              ></v-radio>
+              <v-radio
+                label="非公開"
+                value=false
+              ></v-radio>
+            </v-radio-group>
 
-  </v-container>
+          </v-container>
           </div>
         </v-card-text>
         <v-card-actions>
@@ -115,8 +115,6 @@ export default {
     dialog: false,
     switch1: true,
     
-        row: '',
-
     item_id: '',
     item_name: '',
     postData: {
@@ -126,7 +124,7 @@ export default {
     item_price: '',
     num_items: numRange,
     item_stock: '',
-    release: '01',
+    release: 'true',
 
     create_at: "",
     update_at: "",
@@ -142,9 +140,7 @@ export default {
     ],
     }
   },
-  // data: () => ({
-    
-  // }),
+  
   methods: {
     changeImg (e) {
       this.thumbnail = e.target.files[0]
@@ -178,7 +174,7 @@ export default {
         category_id: this.category_id,
         item_price: this.item_price,
         item_stock: this.item_stock,
-        release: this.row
+        release: this.release
       };
       await API.graphql(graphqlOperation(createItems, {input: addItem}))
       .then(response => {
@@ -187,10 +183,10 @@ export default {
       }).catch(error => {
           console.log(error)
       });
-      // setTimeout(() => {
-      //   let url = '/itemlist'
-      //   window.location.href = url
-      // }, 1000)
+      setTimeout(() => {
+        let url = '/itemlist'
+        window.location.href = url
+      }, 1000)
     },
   }
   
