@@ -105,7 +105,7 @@ export default {
         { text: 'カテゴリ', value: 'category_id' },
         { text: '商品名', value: 'item_name' },
         { text: '値段(税込み)', value: 'item_price' },
-        { text: '備考', value: 'remarks' },
+        { text: '在庫', value: 'item_stock' },
         { text: '操作', value: 'actions' },
       ],
       desserts: [
