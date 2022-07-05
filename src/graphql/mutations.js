@@ -12,10 +12,9 @@ export const createItems = /* GraphQL */ `
       category_id
       item_name
       item_price
-      race_option
-      soup_option
       release
       deleteAt
+      item_stock
       create_user
       update_user
       delete_user
@@ -36,10 +35,9 @@ export const updateItems = /* GraphQL */ `
       category_id
       item_name
       item_price
-      race_option
-      soup_option
       release
       deleteAt
+      item_stock
       create_user
       update_user
       delete_user
@@ -60,10 +58,9 @@ export const deleteItems = /* GraphQL */ `
       category_id
       item_name
       item_price
-      race_option
-      soup_option
       release
       deleteAt
+      item_stock
       create_user
       update_user
       delete_user
@@ -124,8 +121,27 @@ export const createCarts = /* GraphQL */ `
     $condition: ModelCartsConditionInput
   ) {
     createCarts(input: $input, condition: $condition) {
+      id
       item_id
+      items {
+        item_id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
       user_id
+      rice_option
+      soup_option
       createdAt
       updatedAt
     }
@@ -137,8 +153,27 @@ export const updateCarts = /* GraphQL */ `
     $condition: ModelCartsConditionInput
   ) {
     updateCarts(input: $input, condition: $condition) {
+      id
       item_id
+      items {
+        item_id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
       user_id
+      rice_option
+      soup_option
       createdAt
       updatedAt
     }
@@ -150,8 +185,27 @@ export const deleteCarts = /* GraphQL */ `
     $condition: ModelCartsConditionInput
   ) {
     deleteCarts(input: $input, condition: $condition) {
+      id
       item_id
+      items {
+        item_id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
       user_id
+      rice_option
+      soup_option
       createdAt
       updatedAt
     }
