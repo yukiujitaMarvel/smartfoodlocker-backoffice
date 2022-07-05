@@ -61,11 +61,11 @@
               :rules="rules"
               hide-details="auto"
             ></v-text-field>
-            <!-- <v-select
-              v-model="item_num"
+            <v-select
+              v-model="item_stock"
               :items="num_items"
               label="数"
-            ></v-select> -->
+            ></v-select>
             <!-- <div class="radio-group">
               <input type="radio"  id="01" name="release" value="01" style="transform:scale(2.0); margin:10px;" checked="checked" v-model="release"><span style="font-size:12px;">公開</span>
               <input type="radio" id="02" name="release" value="02" style="transform:scale(2.0); margin:10px;" v-model="release"><span style="font-size:12px;">非公開</span>
@@ -113,7 +113,7 @@ export default {
     category_id: '',
     item_price: '',
     num_items: numRange,
-    // item_num: '',
+    item_stock: '',
     // release: '',
 
     create_at: "",
@@ -165,7 +165,7 @@ export default {
         item_img: this.postData.thumbnail,
         category_id: this.category_id,
         item_price: this.item_price,
-        // item_num: this.item_num,
+        item_stock: this.item_stock,
         // release: this.release
       };
       await API.graphql(graphqlOperation(createItems, {input: addItem}))
