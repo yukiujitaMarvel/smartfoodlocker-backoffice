@@ -6,7 +6,7 @@
         <v-col>
           <v-card v-if="users">
             <div class="order-title">
-              <h1>顧客一覧</h1>
+              <h1>売上一覧</h1>
             </div>
             <v-card-title>
               <v-text-field
@@ -104,7 +104,7 @@ import '~/assets/css/style.css'
   export default {
     head() {
       return {
-        title: '顧客一覧 | smartfoodlocker管理画面'
+        title: '売上一覧 | smartfoodlocker管理画面'
       }
     },
     components: {
