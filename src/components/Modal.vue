@@ -99,7 +99,7 @@ const numRange = [...Array(maxAge).keys()]
 export default {
   data() {
     return {
-      dialog: false,
+    dialog: false,
     switch1: true,
     column: null,
     
