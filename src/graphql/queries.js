@@ -45,9 +45,9 @@ export const listItemLists = /* GraphQL */ `
   }
 `;
 export const getItems = /* GraphQL */ `
-  query GetItems($item_id: ID!) {
-    getItems(item_id: $item_id) {
-      item_id
+  query GetItems($id: ID!) {
+    getItems(id: $id) {
+      id
       item_img
       category_id
       item_name
@@ -66,21 +66,21 @@ export const getItems = /* GraphQL */ `
 `;
 export const listItems = /* GraphQL */ `
   query ListItems(
-    $item_id: ID
+    $id: ID
     $filter: ModelItemsFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listItems(
-      item_id: $item_id
+      id: $id
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
@@ -144,7 +144,7 @@ export const getCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
