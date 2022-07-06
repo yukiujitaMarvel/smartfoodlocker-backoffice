@@ -77,7 +77,7 @@
                       <v-list-item>
                         <v-list-item-title>編集</v-list-item-title>
                       </v-list-item>
-                      <v-list-item>
+                      <v-list-item @click="deleteItem(item)">
                         <v-list-item-title>削除</v-list-item-title>
                       </v-list-item>
                     </v-list>
@@ -96,6 +96,7 @@
 <script>
 import { API, graphqlOperation} from 'aws-amplify'
 import { listItems } from '../graphql/queries'
+import { deleteItems } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
 import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
@@ -170,6 +171,16 @@ export default {
 
     check(item) {
       console.log(item.item_id);
+    },
+
+    async deleteItem(item){
+      const deleteItemsInput = {
+        item_id: item.item_id
+      };
+      const deleteItem = await API.graphql(graphqlOperation(deleteItems,{input: deleteItemsInput}));
+      console.log(deleteItem)
+      
+      await this.getItems()
     },
   }
 }
