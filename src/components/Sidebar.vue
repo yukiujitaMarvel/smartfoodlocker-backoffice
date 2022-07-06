@@ -90,7 +90,7 @@
           { title: '顧客一覧', icon: 'mdi-account', link: '/users' },
           { title: '売上一覧', icon: 'mdi-database-outline', link: '/sales' },
           { title: '各種出力', icon: 'mdi-export-variant', link: '/export' },
-          { title: '休日管理', icon: 'mdi-calendar-blank', link: '/holidayManager' },
+          { title: 'チケット管理', icon: 'mdi-ticket', link: '/ticket' },
           { title: '設定', icon: 'mdi-cog-outline' },
         ],
         mini: true,

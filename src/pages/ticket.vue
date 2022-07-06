@@ -1,5 +1,4 @@
 <template>
-<!-- 休日管理ページレイアウト保管 -->
   <div class="display-wrap">
   <Sidebar />
     <div class="right-wrap">
@@ -20,7 +19,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    休日追加
+                    新規チケット追加
                   </v-btn>
                 </div>
               </template>
@@ -196,10 +195,19 @@
               <thead>
                 <tr>
                   <th class="text-left">
-                    日時
+                    チケットID
                   </th>
                   <th class="text-left">
-                    カテゴリ
+                    画像
+                  </th>
+                  <th class="text-left">
+                    タイトル
+                  </th>
+                  <th class="text-left">
+                    内容
+                  </th>
+                  <th class="text-left">
+                    有効期限
                   </th>
                 </tr>
               </thead>
@@ -208,8 +216,11 @@
                   v-for="item in desserts"
                   :key="item.name"
                 >
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.calories }}</td>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.img }}</td>
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.contents }}</td>
+                  <td>{{ item.expiry }}</td>
                 </tr>
               </tbody>
             </template>
@@ -261,29 +272,32 @@ import '~/assets/css/style.css'
 
       desserts: [
           {
-            name: '2022/07/01',
-            calories: '休日',
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            expiry: '2022/10/22',
           },
           {
-            name: '2022/07/02',
-            calories: '休日',
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            expiry: '2022/10/22',
+          },{
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            expiry: '2022/10/22',
+          },{
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            expiry: '2022/10/22',
           },
-          {
-            name: '2022/07/03',
-            calories: '休日',
-          },
-          {
-            name: '2022/07/04',
-            calories: '休日',
-          },
-          {
-            name: '2022/07/05',
-            calories: '休日',
-          },
-          {
-            name: '2022/07/06',
-            calories: '休日',
-          },
+          
           
         ],
     }
