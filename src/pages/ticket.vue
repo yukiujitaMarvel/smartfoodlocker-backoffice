@@ -4,6 +4,9 @@
     <div class="right-wrap">
       <v-row class="fill-height">
         <v-col>
+          <div class="order-title">
+            <h1>チケット一覧</h1>
+          </div>
           <v-row>
             <v-dialog
               v-model="dialog"
@@ -207,6 +210,9 @@
                     内容
                   </th>
                   <th class="text-left">
+                    使用開始日
+                  </th>
+                  <th class="text-left">
                     有効期限
                   </th>
                 </tr>
@@ -220,6 +226,7 @@
                   <td>{{ item.img }}</td>
                   <td>{{ item.title }}</td>
                   <td>{{ item.contents }}</td>
+                  <td>{{ item.start_use }}</td>
                   <td>{{ item.expiry }}</td>
                 </tr>
               </tbody>
@@ -276,6 +283,7 @@ import '~/assets/css/style.css'
             img: 'img',
             title: 'チケット１',
             contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
             expiry: '2022/10/22',
           },
           {
@@ -283,20 +291,44 @@ import '~/assets/css/style.css'
             img: 'img',
             title: 'チケット１',
             contents: 'testtesttesttesttesttesttest',
-            expiry: '2022/10/22',
-          },{
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            expiry: '2022/10/22',
-          },{
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
             expiry: '2022/10/22',
           },
+          {
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
+            expiry: '2022/10/22',
+          },
+          {
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
+            expiry: '2022/10/22',
+          },
+          {
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
+            expiry: '2022/10/22',
+          },
+          {
+            id: 't-1234',
+            img: 'img',
+            title: 'チケット１',
+            contents: 'testtesttesttesttesttesttest',
+            start_use: '2022/07/07',
+            expiry: '2022/10/22',
+          },
+         
+          
+          
           
           
         ],
@@ -381,6 +413,12 @@ button{
 }
 .v-toolbar__title{
   font-weight: bold;
+}
+.order-title{
+  padding: 10px;
+}
+.order-title h1{
+  font-size: 20px;
 }
 
 </style>

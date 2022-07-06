@@ -4,6 +4,9 @@
     <div class="right-wrap">
       <v-row class="fill-height">
         <v-col>
+          <div class="order-title">
+            <h1>各種出力</h1>
+          </div>
           <v-simple-table>
             <template v-slot:default>
               <thead>
@@ -145,6 +148,12 @@ td {
 }
 button{
   font-weight: bold;
+}
+.order-title{
+  padding: 10px;
+}
+.order-title h1{
+  font-size: 20px;
 }
 
 
