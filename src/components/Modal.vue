@@ -115,7 +115,6 @@ export default {
     dialog: false,
     switch1: true,
     
-    item_id: '',
     item_name: '',
     postData: {
       thumbnail: '',
@@ -156,19 +155,7 @@ export default {
       }
     },
     async createItem() {
-      var len = 4;
-      var str = "1234567890";
-      var strLen = str.length;
-      var result = "";
-      
-      for (var i = 0; i < len; i++) {
-        result += str[Math.floor(Math.random() * strLen)];
-      }
-      const createItemId = 'p-' + result
-      this.item_id = createItemId
-
       const addItem = {
-        item_id: this.item_id,
         item_name: this.item_name,
         item_img: this.postData.thumbnail,
         category_id: this.category_id,

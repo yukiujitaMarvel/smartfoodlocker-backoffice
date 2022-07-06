@@ -119,7 +119,7 @@ export default {
         {
           text: '商品番号',
           align: 'start',
-          value: 'item_id',
+          value: 'id',
         },
         { text: '画像', value: 'item_img' },
         { text: 'カテゴリ', value: 'category_id' },
@@ -169,16 +169,16 @@ export default {
     },
 
     check(item) {
-      console.log(item.item_id);
+      console.log(item.id);
     },
 
     async updateItem(item){
-      console.log(item.item_id);
+      console.log(item.id);
     },
 
     async deleteItem(item){
       const deleteItemsInput = {
-        item_id: item.item_id
+        id: item.id
       };
       const deleteItem = await API.graphql(graphqlOperation(deleteItems,{input: deleteItemsInput}));
       console.log(deleteItem)
