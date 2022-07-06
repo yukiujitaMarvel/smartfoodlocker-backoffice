@@ -58,13 +58,32 @@
               
 
               <template v-slot:[`item.actions`]="{ item }">
-                <v-icon
-                  nomal
-                  @click="edit(item)"
-                >
-                  mdi-dots-vertical
-                </v-icon>
+                 <v-menu
+                    bottom
+                    offset-y
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        nomal
+                        class="ma-2"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="check(item)"
+                      >
+                        mdi-dots-vertical
+                      </v-icon>
+                    </template>
+                    <v-list>
+                      <v-list-item>
+                        <v-list-item-title>編集</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-title>削除</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
               </template>
+               
 
             </v-data-table>
           </v-card>
@@ -149,7 +168,7 @@ export default {
     },
 
 
-    edit(item) {
+    check(item) {
       console.log(item.item_id);
     },
   }
