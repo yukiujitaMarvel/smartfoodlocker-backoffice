@@ -4,7 +4,7 @@
 export const onCreateItems = /* GraphQL */ `
   subscription OnCreateItems {
     onCreateItems {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -24,7 +24,7 @@ export const onCreateItems = /* GraphQL */ `
 export const onUpdateItems = /* GraphQL */ `
   subscription OnUpdateItems {
     onUpdateItems {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -44,7 +44,7 @@ export const onUpdateItems = /* GraphQL */ `
 export const onDeleteItems = /* GraphQL */ `
   subscription OnDeleteItems {
     onDeleteItems {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -103,7 +103,7 @@ export const onCreateCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
@@ -132,7 +132,7 @@ export const onUpdateCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
@@ -161,7 +161,7 @@ export const onDeleteCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name

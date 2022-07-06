@@ -7,7 +7,7 @@ export const createItems = /* GraphQL */ `
     $condition: ModelItemsConditionInput
   ) {
     createItems(input: $input, condition: $condition) {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -30,7 +30,7 @@ export const updateItems = /* GraphQL */ `
     $condition: ModelItemsConditionInput
   ) {
     updateItems(input: $input, condition: $condition) {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -53,7 +53,7 @@ export const deleteItems = /* GraphQL */ `
     $condition: ModelItemsConditionInput
   ) {
     deleteItems(input: $input, condition: $condition) {
-      item_id
+      id
       item_img
       category_id
       item_name
@@ -124,7 +124,7 @@ export const createCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
@@ -156,7 +156,7 @@ export const updateCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
@@ -188,7 +188,7 @@ export const deleteCarts = /* GraphQL */ `
       id
       item_id
       items {
-        item_id
+        id
         item_img
         category_id
         item_name
