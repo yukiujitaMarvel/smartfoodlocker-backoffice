@@ -74,7 +74,7 @@
                       </v-icon>
                     </template>
                     <v-list>
-                      <v-list-item>
+                      <v-list-item @click="updateItem(item)">
                         <v-list-item-title>編集</v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="deleteItem(item)">
@@ -168,8 +168,11 @@ export default {
       this.desserts = itemLists
     },
 
-
     check(item) {
+      console.log(item.item_id);
+    },
+
+    async updateItem(item){
       console.log(item.item_id);
     },
 
