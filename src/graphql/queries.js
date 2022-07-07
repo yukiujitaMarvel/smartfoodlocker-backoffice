@@ -1,49 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getItemList = /* GraphQL */ `
-  query GetItemList($item_id: String!) {
-    getItemList(item_id: $item_id) {
-      item_id
-      item_img
-      category_id
-      item_name
-      item_price
-      remaiks
-      release
-      create_at
-      update_at
-      delete_at
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
-    }
-  }
-`;
-export const listItemLists = /* GraphQL */ `
-  query ListItemLists($limit: Int, $nextToken: String) {
-    listItemLists(limit: $limit, nextToken: $nextToken) {
-      items {
-        item_id
-        item_img
-        category_id
-        item_name
-        item_price
-        remaiks
-        release
-        create_at
-        update_at
-        delete_at
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
-      }
-      nextToken
-    }
-  }
-`;
 export const getItems = /* GraphQL */ `
   query GetItems($id: ID!) {
     getItems(id: $id) {
@@ -160,6 +117,14 @@ export const getCarts = /* GraphQL */ `
         updatedAt
       }
       user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
       rice_option
       soup_option
       createdAt
@@ -188,6 +153,77 @@ export const listCarts = /* GraphQL */ `
         user_id
         rice_option
         soup_option
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOrders = /* GraphQL */ `
+  query GetOrders($id: ID!) {
+    getOrders(id: $id) {
+      id
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      statas
+      lock_flg
+      item_num
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $id: ID
+    $filter: ModelOrdersFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listOrders(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        item_id
+        user_id
+        statas
+        lock_flg
+        item_num
+        create_user
+        update_user
         createdAt
         updatedAt
       }
