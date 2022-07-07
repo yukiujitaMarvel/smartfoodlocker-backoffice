@@ -83,7 +83,7 @@ import '~/assets/css/style.css'
           { text: '商品数', value: 'item_num' },
           { text: '顧客番号', value: 'user_id' },
           { text: '注文日時', value: 'createdAt' },
-          { text: 'ステータス', value: 'status' },
+          { text: 'ステータス', value: 'statas' },
           { text: '操作', value: 'actions' },
         ],
         desserts: [],
@@ -97,25 +97,21 @@ import '~/assets/css/style.css'
         const orders = await API.graphql(graphqlOperation(listOrders));
         const orderLists = orders.data.listOrders.items;
 
-        // console.log(orderLists)
-
         var status1 = '準備中'
         var status2 = 'キャンセル'
         var status3 = '完了'
 
         orderLists.forEach((value, index) => {
-          console.log(value)
-          if(value.status == '01') {
-            orderLists[index].status = '準備中'
-          }else if(value.status == '02') {
-            orderLists[index].status = 'キャンセル'
+          if(value.statas == '01') {
+            orderLists[index].statas = status1
+          }else if(value.statas == '02') {
+            orderLists[index].statas = status2
           }else {
-            orderLists[index].status = '完了'
+            orderLists[index].statas = status3
           }
         })
 
         this.desserts = orderLists
-        console.log(this.desserts)
       },
       edit(item) {
         console.log(item.name)
