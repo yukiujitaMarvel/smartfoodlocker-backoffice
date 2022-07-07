@@ -1,3 +1,6 @@
+
+
+
 <template>
   <div class="display-wrap">
   <Sidebar />
@@ -43,6 +46,90 @@
               :search="search"
               class="elevation-1 my-3 mx-auto"
             >
+              <template v-slot:top>
+                <v-dialog v-model="dialog" max-width="600px">
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">商品編集</span>
+                    </v-card-title>
+
+                    <v-card-text>
+                      <div>
+                        <v-text-field
+                          v-model="edititems.item_name"
+                          label="商品名"
+                          hide-details="auto"
+                        ></v-text-field>
+                        <div class="file-wrap">
+                          <label for="form-images">ファイルを選択</label>
+                          <input type="file" id="form-images" @change="changeImg">
+                          <div class="upload-img" v-if="postData.thumbnail != ''">
+                            <img :src="postData.thumbnail" alt="">
+                          </div>
+                          <div v-else>
+                            <div class="upload-img" v-if="edititems.item_img != ''">
+                              <img :src="edititems.item_img" alt="">
+                            </div>
+                            <span class="select-image" v-else>選択されていません</span>
+                          </div>
+                        </div>
+                        <v-row align="center">
+                          <v-col cols="12">
+                          <v-select
+                            v-model="edititems.category_id"
+                            label="カテゴリ名"
+                            :items="items"
+                            item-text="name"
+                            item-value="value"
+                            required>
+                          ></v-select>
+                          </v-col>
+                        </v-row>
+                        <v-text-field
+                          v-model="edititems.item_price"
+                          label="値段"
+                          hide-details="auto"
+                        ></v-text-field>
+                        <v-select
+                          v-model="edititems.item_stock"
+                          :items="num_items"
+                          label="数"
+                        ></v-select>
+                        <v-container fluid>
+                
+                        <v-radio-group
+                          v-model="edititems.release"
+                          row
+                        >
+                          <v-radio
+                            label="公開"
+                            v-bind:value='true'
+                          ></v-radio>
+                          <v-radio
+                            label="非公開"
+                            v-bind:value='false'
+                          ></v-radio>
+                        </v-radio-group>
+
+                      </v-container>
+                      </div>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                    <div class="item-add-btn">
+                        <v-btn
+                          color="warning"
+                          dark
+                        >
+                          商品を更新する
+                        </v-btn>
+                      </div>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </template>
+
+
               <!-- サムネイル -->
               <template v-slot:[`item.item_img`]="{ item }">
                   <v-img :src="item.item_img" 
@@ -54,8 +141,6 @@
                           class="ma-0 pa-0"
                   ></v-img>
               </template>
-
-              
 
               <template v-slot:[`item.actions`]="{ item }">
                  <v-menu
@@ -73,8 +158,9 @@
                         mdi-dots-vertical
                       </v-icon>
                     </template>
+
                     <v-list>
-                      <v-list-item @click="updateItem(item)">
+                      <v-list-item @click="editItem(item)">
                         <v-list-item-title>編集</v-list-item-title>
                       </v-list-item>
                       <v-list-item @click="deleteItem(item)">
@@ -96,10 +182,12 @@
 <script>
 import { API, graphqlOperation} from 'aws-amplify'
 import { listItems } from '../graphql/queries'
-import { deleteItems } from '../graphql/mutations'
+import { deleteItems, updateItems } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
 import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
+const maxAge = 100; //表示したい数字より+1で設定。
+const numRange = [...Array(maxAge).keys()]
 
 export default {
   head() {
@@ -128,16 +216,18 @@ export default {
         { text: '在庫', value: 'item_stock' },
         { text: '操作', value: 'actions' },
       ],
-      desserts: [
-        // {
-        //   name: 'p-6768',
-        //   item_img: require('@/assets/img/yakiniku.png'),
-        //   category: '弁当',
-        //   item_name: '焼肉弁当',
-        //   item_price: '600円',
-        //   remarks: 'オプション　ご飯　味噌汁',
-        // },
+      desserts: [],
+      items: [
+        {name:'弁当', value:'01'},
+        {name:'サンドイッチ', value:'02'},
+        {name:'サラダ', value:'03'},
+        {name:'スープ', value:'04'}
       ],
+      num_items: numRange,
+      edititems: [],
+      postData: {
+        thumbnail: '',
+      },
     }
   },
   async created() {
@@ -164,16 +254,43 @@ export default {
           itemLists[index].category_id = category_name4
         }
       })
-      // console.log(itemLists)
       this.desserts = itemLists
+      console.log(this.desserts)
     },
 
     check(item) {
       console.log(item.id);
     },
 
-    async updateItem(item){
-      console.log(item.id);
+    async editItem(item){
+      this.dialog = true
+
+      if(item.category_id == '弁当'){
+        item.category_id = '01'
+      }else if (item.category_id == 'サンドイッチ'){
+        item.category_id = '02'
+      }else if(item.category_id == 'サラダ'){
+        item.category_id = '03'
+      }else {
+        item.category_id = '04'
+      }
+
+      this.edititems = Object.assign({}, item)
+      console.log(this.edititems)
+      
+    },
+    changeImg (e) {
+      this.thumbnail = e.target.files[0]
+      console.log(this.thumbnail)
+ 
+      if (this.thumbnail) {
+        const reader = new FileReader()
+        reader.onload = () => {
+          this.postData.thumbnail = reader.result + ''
+        }
+        reader.readAsDataURL(this.thumbnail)
+        console.log('選択完了')
+      }
     },
 
     async deleteItem(item){
@@ -196,9 +313,52 @@ export default {
 .order-title h1{
   font-size: 20px;
 }
-.col{
+/* .col{
   height: 100vh;
+} */
+.file-wrap{
+  margin: 30px 0 30px 0;
 }
+label {
+  padding: 5px 20px;
+  color: #ffffff;
+  background-color: orange;
+  cursor: pointer;
+  border-radius:10px;
+  transition: .3s;
+  font-weight: bold;
+}
+label:hover {
+  opacity: 0.8;
+}
+input[type="file"] {
+  display: none;
+}
+.v-card__title{
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+}
+.v-card__title span {
+  font-weight: bold;
 
+}
+.v-card__actions{
+  display: block;
+  text-align: center;
+}
+button {
+  font-weight: bold;
+}
+.upload-img{
+  width: 100px;
+  height: 100px;
+  margin: 10px 0 0 10px;
+}
+.upload-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 
+}
 </style>

@@ -74,11 +74,11 @@
             >
               <v-radio
                 label="公開"
-                value=true
+                v-bind:value='true'
               ></v-radio>
               <v-radio
                 label="非公開"
-                value=false
+                v-bind:value='false'
               ></v-radio>
             </v-radio-group>
 
@@ -123,7 +123,7 @@ export default {
     item_price: '',
     num_items: numRange,
     item_stock: '',
-    release: 'true',
+    release: true,
 
     create_at: "",
     update_at: "",

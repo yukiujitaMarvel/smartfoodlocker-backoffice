@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { API, graphqlOperation} from 'aws-amplify'
+import { listOrders } from '../graphql/queries'
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 
@@ -75,61 +77,46 @@ import '~/assets/css/style.css'
             text: '注文番号',
             align: 'start',
             filterable: false,
-            value: 'name',
+            value: 'id',
           },
-          { text: '注文日時', value: 'order_date' },
-          { text: '顧客番号', value: 'user_id' },
-          { text: '商品数', value: 'item_num' },
           { text: '注文詳細', value: 'order_detail' },
+          { text: '商品数', value: 'item_num' },
+          { text: '顧客番号', value: 'user_id' },
+          { text: '注文日時', value: 'createdAt' },
           { text: 'ステータス', value: 'status' },
           { text: '操作', value: 'actions' },
         ],
-        desserts: [
-          {
-            name: '31-0007',
-            order_date: '2023-10-31 10:30',
-            user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
-            item_num: 2,
-            order_detail: '焼肉弁当　フレッシュサラダ',
-            status: '準備中',
-          },
-          {
-            name: '31-0006',
-            order_date: '2023-10-31 10:30',
-            user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
-            item_num: 2,
-            order_detail: '焼肉弁当　フレッシュサラダ',
-            status: '準備中',
-          },
-          {
-            name: '31-0005',
-            order_date: '2023-10-31 10:30',
-            user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
-            item_num: 2,
-            order_detail: '焼肉弁当　フレッシュサラダ',
-            status: '準備中',
-          },
-          {
-            name: '31-0004',
-            order_date: '2023-10-31 10:30',
-            user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
-            item_num: 2,
-            order_detail: '焼肉弁当　フレッシュサラダ',
-            status: '準備中',
-          },
-          {
-            name: '31-0003',
-            order_date: '2023-10-31 10:30',
-            user_id: 'a6f7ab85-a8db-4f2f-a169-958b6baddb94',
-            item_num: 2,
-            order_detail: '焼肉弁当　フレッシュサラダ',
-            status: '準備中',
-          },
-          
-        ],
+        desserts: [],
       }
     },
+    async created() {
+      await this.getOrders()
+    },
     methods: {
+      async getOrders() {
+        const orders = await API.graphql(graphqlOperation(listOrders));
+        const orderLists = orders.data.listOrders.items;
+
+        // console.log(orderLists)
+
+        var status1 = '準備中'
+        var status2 = 'キャンセル'
+        var status3 = '完了'
+
+        orderLists.forEach((value, index) => {
+          console.log(value)
+          if(value.status == '01') {
+            orderLists[index].status = '準備中'
+          }else if(value.status == '02') {
+            orderLists[index].status = 'キャンセル'
+          }else {
+            orderLists[index].status = '完了'
+          }
+        })
+
+        this.desserts = orderLists
+        console.log(this.desserts)
+      },
       edit(item) {
         console.log(item.name)
       }
