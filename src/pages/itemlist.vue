@@ -147,7 +147,7 @@
               class="elevation-1 my-3 mx-auto"
             >
               <template v-slot:top>
-                <v-dialog v-model="dialog" max-width="600px">
+                <v-dialog v-model="editdialog" max-width="600px">
                   <v-card>
                     <v-card-title>
                       <span class="text-h5">商品編集</span>
@@ -163,8 +163,8 @@
                         <div class="file-wrap">
                           <label for="form-images">ファイルを選択</label>
                           <input type="file" id="form-images" @change="changeImg">
-                          <div class="upload-img" v-if="postData.thumbnail != ''">
-                            <img :src="postData.thumbnail" alt="">
+                          <div class="upload-img" v-if="editData.thumbnail != ''">
+                            <img :src="editData.thumbnail" alt="">
                           </div>
                           <div v-else>
                             <div class="upload-img" v-if="edititems.item_img != ''">
@@ -299,7 +299,7 @@ export default {
   },
   data () {
     return {
-      dialog: false,
+      editdialog: false,
       createdialog: false,
       search: '',
 
@@ -341,7 +341,7 @@ export default {
         {name:'スープ', value:'04'}
       ],
       edititems: [],
-      postData: {
+      editData: {
         thumbnail: '',
       },
     }
@@ -350,6 +350,7 @@ export default {
     await this.getItems();
   },
   methods: {
+    // 新規登録画像用
     createImg (e) {
       this.img = e.target.files[0]
       console.log(this.img)
@@ -363,6 +364,7 @@ export default {
         console.log('選択完了')
       }
     },
+    // 商品新規登録
     async createItem() {
       this.createdialog = false
 
@@ -385,6 +387,7 @@ export default {
       await this.getItems();
     },
 
+    // 商品データ取得
     async getItems() {
       const items = await API.graphql(graphqlOperation(listItems));
       const itemLists = items.data.listItems.items;
@@ -414,12 +417,14 @@ export default {
       // console.log(this.desserts)
     },
 
+    // 操作アイコン
     check(item) {
       console.log(item.id);
     },
 
+    // 商品編集データ取得
     async editItem(item){
-      this.dialog = true
+      this.editdialog = true
 
       if(item.category_id == '弁当'){
         item.category_id = '01'
@@ -435,6 +440,8 @@ export default {
       console.log(this.edititems)
       
     },
+
+    // 商品編集画像用
     changeImg (e) {
       this.thumbnail = e.target.files[0]
       console.log(this.thumbnail)
@@ -442,13 +449,14 @@ export default {
       if (this.thumbnail) {
         const reader = new FileReader()
         reader.onload = () => {
-          this.postData.thumbnail = reader.result + ''
+          this.editData.thumbnail = reader.result + ''
         }
         reader.readAsDataURL(this.thumbnail)
         console.log('選択完了')
       }
     },
 
+    // 商品削除
     async deleteItem(item){
       const deleteItemsInput = {
         id: item.id
