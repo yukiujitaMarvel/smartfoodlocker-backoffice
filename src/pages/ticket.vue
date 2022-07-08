@@ -173,7 +173,6 @@ import { API, graphqlOperation} from 'aws-amplify'
 import { listTickets } from '../graphql/queries'
 import { createTickets } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
-import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
 
 
@@ -185,7 +184,6 @@ export default {
   },
   components: {
     Sidebar,
-    Modal
   },
   data () {
     return {
@@ -313,7 +311,7 @@ button {
 
 }
 .modal-btn{
-  margin: 30px;
+  margin: 20px;
 }
 .use-ticket-wrap{
   margin-top: 10px;
