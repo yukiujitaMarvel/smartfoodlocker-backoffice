@@ -361,3 +361,51 @@ export const onDeletePayInfo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateTickets = /* GraphQL */ `
+  subscription OnCreateTickets {
+    onCreateTickets {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTickets = /* GraphQL */ `
+  subscription OnUpdateTickets {
+    onUpdateTickets {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTickets = /* GraphQL */ `
+  subscription OnDeleteTickets {
+    onDeleteTickets {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -406,3 +406,60 @@ export const deletePayInfo = /* GraphQL */ `
     }
   }
 `;
+export const createTickets = /* GraphQL */ `
+  mutation CreateTickets(
+    $input: CreateTicketsInput!
+    $condition: ModelTicketsConditionInput
+  ) {
+    createTickets(input: $input, condition: $condition) {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTickets = /* GraphQL */ `
+  mutation UpdateTickets(
+    $input: UpdateTicketsInput!
+    $condition: ModelTicketsConditionInput
+  ) {
+    updateTickets(input: $input, condition: $condition) {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTickets = /* GraphQL */ `
+  mutation DeleteTickets(
+    $input: DeleteTicketsInput!
+    $condition: ModelTicketsConditionInput
+  ) {
+    deleteTickets(input: $input, condition: $condition) {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;

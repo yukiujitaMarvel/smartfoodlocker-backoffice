@@ -268,3 +268,50 @@ export const listPayInfos = /* GraphQL */ `
     }
   }
 `;
+export const getTickets = /* GraphQL */ `
+  query GetTickets($id: ID!) {
+    getTickets(id: $id) {
+      id
+      ticket_img
+      ticket_title
+      ticket_content
+      start_use
+      expiry
+      create_user
+      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTickets = /* GraphQL */ `
+  query ListTickets(
+    $id: ID
+    $filter: ModelTicketsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listTickets(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        ticket_img
+        ticket_title
+        ticket_content
+        start_use
+        expiry
+        create_user
+        update_user
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
