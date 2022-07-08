@@ -238,24 +238,29 @@ export default {
       const items = await API.graphql(graphqlOperation(listItems));
       const itemLists = items.data.listItems.items;
 
+      const releaseItem = itemLists.filter((value) => {
+          return value.release == true;
+      })
+
       var category_name1 = '弁当'
       var category_name2 = 'サンドイッチ'
       var category_name3 = 'サラダ'
       var category_name4 = 'スープ'
 
-      itemLists.forEach((value,index) => {
+      releaseItem.forEach((value,index) => {
         if(value.category_id == '01'){
-          itemLists[index].category_id = category_name1
+          releaseItem[index].category_id = category_name1
         }else if (value.category_id == '02'){
-          itemLists[index].category_id = category_name2
+          releaseItem[index].category_id = category_name2
         }else if(value.category_id == '03'){
-          itemLists[index].category_id = category_name3
+          releaseItem[index].category_id = category_name3
         }else {
-          itemLists[index].category_id = category_name4
+          releaseItem[index].category_id = category_name4
         }
       })
-      this.desserts = itemLists
-      console.log(this.desserts)
+
+      this.desserts = releaseItem
+      // console.log(this.desserts)
     },
 
     check(item) {
