@@ -4,133 +4,164 @@
     <div class="right-wrap">
       <v-row class="fill-height">
         <v-col>
-          <div class="order-title">
-            <h1>チケット一覧</h1>
-          </div>
-          <v-row>
-            <v-dialog
-              v-model="dialog"
-              fullscreen
-              hide-overlay
-              transition="dialog-bottom-transition"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <div class="modal-btn">
-                  <v-btn
-                    color="orange"
-                    dark
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    新規チケット追加
-                  </v-btn>
-                </div>
-              </template>
-              <v-card>
-                <v-toolbar
-                  dark
-                  color="orange"
-                >
-                  <v-btn
-                    icon
-                    dark
-                    @click="dialog = false"
-                  >
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                  <v-toolbar-title>チケット登録</v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-toolbar-items>
+          <v-card>
+            <div class="order-title">
+              <h1>チケット一覧</h1>
+            </div>
+            
+            <v-row>
+              <v-dialog
+                v-model="dialog"
+                fullscreen
+                hide-overlay
+                transition="dialog-bottom-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <div class="modal-btn">
                     <v-btn
+                      color="orange"
                       dark
-                      text
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      新規チケット追加
+                    </v-btn>
+                  </div>
+                </template>
+                <v-card>
+                  <v-toolbar
+                    dark
+                    color="orange"
+                  >
+                    <v-btn
+                      icon
+                      dark
                       @click="dialog = false"
                     >
-                      保存
+                      <v-icon>mdi-close</v-icon>
                     </v-btn>
-                  </v-toolbar-items>
-                </v-toolbar>
-                <v-list
-                  three-line
-                  subheader
-                >
-                  <v-card>
-                    <v-card-text>
-                      <div>
-                        <v-text-field
-                          label="チケット名"
-                          hide-details="auto"
-                        ></v-text-field>
-                        <div class="file-wrap">
-                          <label for="form-image">ファイルを選択</label>
-                          <input type="file" id="form-image">
-                          <!-- <div class="upload-img" v-if="postData.thumbnail != ''">
-                            <img :src="postData.thumbnail" alt="">
-                          </div> -->
-                          <span class="select-image">選択されていません</span>
+                    <v-toolbar-title>チケット登録</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                      <v-btn
+                        dark
+                        text
+                        @click="createTicket"
+                      >
+                        保存
+                      </v-btn>
+                    </v-toolbar-items>
+                  </v-toolbar>
+                  <v-list
+                    three-line
+                    subheader
+                  >
+                    <v-card>
+                      <v-card-text>
+                        <div>
+                          <v-text-field
+                            v-model="ticket_title"
+                            label="タイトル"
+                            hide-details="auto"
+                          ></v-text-field>
+                          <div class="file-wrap">
+                            <label for="form-image">ファイルを選択</label>
+                            <input type="file" id="form-image">
+                            <!-- <div class="upload-img" v-if="postData.thumbnail != ''">
+                              <img :src="postData.thumbnail" alt="">
+                            </div> -->
+                            <span class="select-image">選択されていません</span>
+                          </div>
+                          <v-container fluid>
+                            <v-textarea
+                              v-model="ticket_content"
+                              counter
+                              label="内容"
+                            ></v-textarea>
+                          </v-container>
+                          <div class="use-ticket-wrap">
+                            <h1>使用開始日</h1>
+                            <input type="date" name="example" value="2022-05-20" v-model="start_use">
+                          </div>
+                          <div class="expiry-ticket-wrap">
+                            <h1>有効期限</h1>
+                            <input type="date" name="example" value="2022-05-20" v-model="expiry">
+                          </div>
                         </div>
-                        <v-text-field
-                          label="タイトル"
-                          hide-details="auto"
-                        ></v-text-field>
-                        <v-text-field
-                          label="内容"
-                          hide-details="auto"
-                        ></v-text-field>
-                        <div class="use-ticket-wrap">
-                          <h1>使用開始日</h1>
-                          <input type="date" name="example" value="2022-05-20">
-                        </div>
-                        <div class="expiry-ticket-wrap">
-                          <h1>有効期限</h1>
-                          <input type="date" name="example" value="2022-05-20">
-                        </div>
-                      </div>
-                    </v-card-text>
-                  </v-card>
-                </v-list>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">
-                    チケットID
-                  </th>
-                  <th class="text-left">
-                    画像
-                  </th>
-                  <th class="text-left">
-                    タイトル
-                  </th>
-                  <th class="text-left">
-                    内容
-                  </th>
-                  <th class="text-left">
-                    使用開始日
-                  </th>
-                  <th class="text-left">
-                    有効期限
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="item in desserts"
-                  :key="item.name"
-                >
-                  <td>{{ item.id }}</td>
-                  <td>{{ item.img }}</td>
-                  <td>{{ item.title }}</td>
-                  <td>{{ item.contents }}</td>
-                  <td>{{ item.start_use }}</td>
-                  <td>{{ item.expiry }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+                      </v-card-text>
+                    </v-card>
+                  </v-list>
+                </v-card>
+              </v-dialog>
+            </v-row>
+
+
+
+            <v-card-title>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="検索"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+
+            
+            
+            <v-data-table
+              :headers="headers"
+              :items="desserts"
+              :items-per-page="5"
+              :search="search"
+              class="elevation-1 my-3 mx-auto"
+            >
+              
+
+
+              <!-- サムネイル -->
+              <template v-slot:[`item.ticket_img`]="{ item }">
+                  <v-img :src="item.ticket_img" 
+                          :aspect-ratop="16/9" 
+                          height="7vw" 
+                          min-height="100px"
+                          width="7vw" 
+                          min-width="100px" 
+                          class="ma-0 pa-0"
+                  ></v-img>
+              </template>
+
+              <template v-slot:[`item.actions`]="{ item }">
+                 <v-menu
+                    bottom
+                    offset-y
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        nomal
+                        class="ma-2"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="check(item)"
+                      >
+                        mdi-dots-vertical
+                      </v-icon>
+                    </template>
+
+                    <v-list>
+                      <v-list-item @click="editItem(item)">
+                        <v-list-item-title>編集</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="deleteItem(item)">
+                        <v-list-item-title>削除</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+              </template>
+               
+
+            </v-data-table>
+          </v-card>
         </v-col>
       </v-row>
     </div>
@@ -138,145 +169,103 @@
 </template>
 
 <script>
+import { API, graphqlOperation} from 'aws-amplify'
+import { listTickets } from '../graphql/queries'
+import { createTickets } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
+import Modal from '~/components/Modal'
 import '~/assets/css/style.css'
 
-  export default {
-    head() {
-      return {
-        title: '休日管理 | smartfoodlocker管理画面'
-      }
-    },
-    components: {
-      Sidebar,
-    },
-    data () {
+
+export default {
+  head() {
     return {
-      dialog: false,
-      notifications: false,
-      sound: true,
-      widgets: false,
-
-
-
-      focus: '',
-      type: 'month',
-      typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days',
-      },
-      selectedEvent: {},
-      selectedElement: null,
-      selectedOpen: false,
-      events: [],
-      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-
-
-
-      desserts: [
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-          {
-            id: 't-1234',
-            img: 'img',
-            title: 'チケット１',
-            contents: 'testtesttesttesttesttesttest',
-            start_use: '2022/07/07',
-            expiry: '2022/10/22',
-          },
-         
-          
-          
-          
-          
-        ],
+      title: 'チケット一覧 | smartfoodlocker管理画面'
     }
   },
+  components: {
+    Sidebar,
+    Modal
+  },
+  data () {
+    return {
+      dialog: false,
+      search: '',
+
+      ticket_title: '',
+      ticket_content: '',
+      start_use: '',
+      expiry: '',
+
+
+      headers: [
+        {
+          text: 'チケットID',
+          align: 'start',
+          value: 'id',
+        },
+        { text: '画像', value: 'ticket_img' },
+        { text: 'タイトル', value: 'ticket_title' },
+        { text: '内容', value: 'ticket_content' },
+        { text: '使用期間', value: 'start_use' },
+        { text: '有効期間', value: 'expiry' },
+        { text: '操作', value: 'actions' },
+      ],
+      desserts: [],
+      
+    }
+  },
+  async created() {
+    await this.getTicket();
+  },
   methods: {
+
+    async getTicket() {
+      const tickets = await API.graphql(graphqlOperation(listTickets));
+      const ticketLists = tickets.data.listTickets.items;
+
+      this.desserts = ticketLists
+    },
+
+    async createTicket() {
+      this.dialog = false;
+
+      this.start_use = new Date(this.start_use).toISOString();
+      this.expiry =  new Date(this.expiry).toISOString();
+
+      const addTicket = {
+        ticket_title: this.ticket_title,
+        ticket_content: this.ticket_content,
+        start_use: this.start_use,
+        expiry: this.expiry,
+      };
+      await API.graphql(graphqlOperation(createTickets, {input: addTicket}))
+      .then(response => {
+          console.log(response);
+          
+      }).catch(error => {
+          console.log(error)
+      });
+
+      await this.getTicket()
       
     },
+
+    check(item) {
+      console.log(item.id);
+    },
+
+    
   }
+}
 </script>
 
 <style scoped>
-td {
-  font-weight: bold;
-  color: gray;
-}
-button{
-  font-weight: bold;
-}
-.modal-btn{
-  padding: 50px;
-}
-.v-toolbar__title{
-  font-weight: bold;
-}
 .order-title{
   padding: 10px;
 }
 .order-title h1{
   font-size: 20px;
-}
-.use-ticket-wrap{
-  margin-top: 10px;
-  padding-top: 8px;
-  border-bottom: 1px solid rgba(105, 103, 103, 0.87);
-}
-.use-ticket-wrap h1{
-  font-size: 16px;
-  padding-bottom: 5px;
-  color: rgba(136, 133, 133, 0.87);
-}
-.expiry-ticket-wrap{
-  margin-top: 10px;
-  padding-top: 8px;
-}
-.expiry-ticket-wrap h1{
-  font-size: 16px;
-  padding-bottom: 5px;
-  color: rgba(136, 133, 133, 0.87);
 }
 .file-wrap{
   margin: 30px 0 30px 0;
@@ -295,5 +284,57 @@ label:hover {
 }
 input[type="file"] {
   display: none;
+}
+.v-card__title{
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+}
+.v-card__title span {
+  font-weight: bold;
+
+}
+.v-card__actions{
+  display: block;
+  text-align: center;
+}
+button {
+  font-weight: bold;
+}
+.upload-img{
+  width: 100px;
+  height: 100px;
+  margin: 10px 0 0 10px;
+}
+.upload-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+.modal-btn{
+  margin: 30px;
+}
+.use-ticket-wrap{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(151, 151, 151);
+}
+.use-ticket-wrap h1{
+  font-size: 16px;
+  padding-top: 8px;
+  color: rgb(151, 151, 151);
+}
+.expiry-ticket-wrap{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.expiry-ticket-wrap h1{
+  font-size: 16px;
+  padding-top: 8px;
+  color: rgb(151, 151, 151);
+}
+.v-toolbar__title{
+  font-weight: bold;
 }
 </style>
