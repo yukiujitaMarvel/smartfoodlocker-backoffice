@@ -331,6 +331,7 @@ export default {
         { text: '商品名', value: 'item_name' },
         { text: '値段(税込み)', value: 'item_price' },
         { text: '在庫', value: 'item_stock' },
+        { text: '公開・非公開', value: 'release' },
         { text: '操作', value: 'actions' },
       ],
       desserts: [],
@@ -341,6 +342,7 @@ export default {
         {name:'スープ', value:'04'}
       ],
       edititems: [],
+      release: true,
       editData: {
         thumbnail: '',
       },
@@ -392,28 +394,32 @@ export default {
       const items = await API.graphql(graphqlOperation(listItems));
       const itemLists = items.data.listItems.items;
 
-      const releaseItem = itemLists.filter((value) => {
-          return value.release == true;
-      })
-
       var category_name1 = '弁当'
       var category_name2 = 'サンドイッチ'
       var category_name3 = 'サラダ'
       var category_name4 = 'スープ'
 
-      releaseItem.forEach((value,index) => {
+      itemLists.forEach((value,index) => {
         if(value.category_id == '01'){
-          releaseItem[index].category_id = category_name1
+          itemLists[index].category_id = category_name1
         }else if (value.category_id == '02'){
-          releaseItem[index].category_id = category_name2
+          itemLists[index].category_id = category_name2
         }else if(value.category_id == '03'){
-          releaseItem[index].category_id = category_name3
+          itemLists[index].category_id = category_name3
         }else {
-          releaseItem[index].category_id = category_name4
+          itemLists[index].category_id = category_name4
         }
       })
 
-      this.desserts = releaseItem
+      itemLists.forEach((value,index) => {
+        if(value.release == true) {
+          itemLists[index].release = '公開'
+        } else {
+          itemLists[index].release = '非公開'
+        }
+      })
+
+      this.desserts = itemLists
       // console.log(this.desserts)
     },
 
@@ -436,9 +442,15 @@ export default {
         item.category_id = '04'
       }
 
+      if(item.release == '公開'){
+        item.release = true
+      }else {
+        item.release = false
+      }
+
       this.edititems = Object.assign({}, item)
-      console.log(this.edititems)
       
+      await this.getItems();
     },
 
     // 商品編集画像用
