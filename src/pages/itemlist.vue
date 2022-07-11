@@ -220,6 +220,7 @@
                         <v-btn
                           color="warning"
                           dark
+                          @click="updateItem()"
                         >
                           商品を更新する
                         </v-btn>
@@ -466,6 +467,28 @@ export default {
         reader.readAsDataURL(this.thumbnail)
         console.log('選択完了')
       }
+    },
+    async updateItem(){
+      this.editdialog = false
+      const updateItem = {
+        id: this.edititems.id,
+        item_name: this.edititems.item_name,
+        // item_img: this.edititems.createData.img,
+        category_id: this.edititems.category_id,
+        item_price: this.edititems.item_price,
+        item_stock: this.edititems.item_stock,
+        release: this.edititems.release,
+      };
+      await API.graphql(graphqlOperation(updateItems, {input: updateItem}))
+      .then(response => {
+          console.log(response);
+          
+      }).catch(error => {
+          console.log(error)
+      });
+      
+      await this.getItems();
+
     },
 
     // 商品削除
