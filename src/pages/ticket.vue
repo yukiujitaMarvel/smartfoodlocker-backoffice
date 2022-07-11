@@ -116,6 +116,69 @@
               :search="search"
               class="elevation-1 my-3 mx-auto"
             >
+              <template v-slot:top>
+                <v-dialog v-model="editdialog" max-width="600px">
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">チケット編集</span>
+                    </v-card-title>
+
+                    <v-card-text>
+                      <div>
+                        <v-text-field
+                          v-model="edititems.ticket_title"
+                          label="チケットタイトル"
+                          hide-details="auto"
+                        ></v-text-field>
+                        <div class="file-wrap">
+                          <label for="form-images">ファイルを選択</label>
+                          <input type="file" id="form-images"  @change="changeImg">
+                          <div class="upload-img" v-if="editData.thumbnail != ''">
+                            <img :src="editData.thumbnail" alt="">
+                          </div>
+                          <div v-else>
+                            <div class="upload-img" v-if="edititems.ticket_img != null">
+                              <img :src="edititems.ticket_img" alt="">
+                            </div>
+                            <span class="select-image" v-else>選択されていません</span>
+                          </div>
+                        </div>
+                        <v-container fluid>
+                          <v-textarea
+                            v-model="edititems.ticket_content"
+                            counter
+                            label="内容"
+                          ></v-textarea>
+                        </v-container>
+                        <v-container fluid>
+
+                        <div class="use-ticket-wrap">
+                          <h1>使用開始日</h1>
+                          <input type="date" name="example" value="2022-05-20" v-model="edititems.start_use">
+                        </div>
+                        <div class="expiry-ticket-wrap">
+                          <h1>有効期限</h1>
+                          <input type="date" name="example" value="2022-05-20" v-model="edititems.expiry">
+                        </div>
+
+                      </v-container>
+                      </div>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                    <div class="item-add-btn">
+                        <v-btn
+                          color="warning"
+                          dark
+                          @click="updateItem()"
+                        >
+                          商品を更新する
+                        </v-btn>
+                      </div>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </template>
               
 
 
@@ -171,7 +234,7 @@
 <script>
 import { API, graphqlOperation} from 'aws-amplify'
 import { listTickets } from '../graphql/queries'
-import { createTickets } from '../graphql/mutations'
+import { createTickets, deleteTickets,} from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 
@@ -188,6 +251,7 @@ export default {
   data () {
     return {
       dialog: false,
+      editdialog: false,
       search: '',
 
       ticket_title: '',
@@ -210,6 +274,10 @@ export default {
         { text: '操作', value: 'actions' },
       ],
       desserts: [],
+      edititems: [],
+      editData: {
+        thumbnail: '',
+      },
       
     }
   },
@@ -251,6 +319,41 @@ export default {
 
     check(item) {
       console.log(item.id);
+    },
+
+    changeImg (e) {
+      this.thumbnail = e.target.files[0]
+      console.log(this.thumbnail)
+ 
+      if (this.thumbnail) {
+        const reader = new FileReader()
+        reader.onload = () => {
+          this.editData.thumbnail = reader.result + ''
+        }
+        reader.readAsDataURL(this.thumbnail)
+        console.log('選択完了')
+      }
+    },
+
+    async editItem(item){
+      this.editdialog = true
+
+      // console.log(item)
+
+      this.edititems = Object.assign({}, item)
+
+      console.log(this.edititems)
+      
+    },
+
+    async deleteItem(item){
+      const deleteItemsInput = {
+        id: item.id
+      };
+      const deleteItem = await API.graphql(graphqlOperation(deleteTickets,{input: deleteItemsInput}));
+      console.log(deleteItem)
+      
+      await this.getTicket()
     },
 
     
