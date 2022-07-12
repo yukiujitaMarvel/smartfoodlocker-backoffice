@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3eb7d6e56",
+  "policyUUID": "eb7d6e56",
+  "bucketName": "smartfoodlockerbacko9a5e36d05ca944aab10a397dcbc",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

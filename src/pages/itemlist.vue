@@ -281,11 +281,13 @@
 </template>
 
 <script>
-import { API, graphqlOperation} from 'aws-amplify'
+import { API, graphqlOperation, Storage} from 'aws-amplify'
 import { listItems } from '../graphql/queries'
 import { createItems, deleteItems, updateItems } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
+import { privateDecrypt } from 'crypto'
+import { ConsoleLogger } from '@aws-amplify/core'
 const maxAge = 100; //表示したい数字より+1で設定。
 const numRange = [...Array(maxAge).keys()]
 
@@ -370,10 +372,17 @@ export default {
     // 商品新規登録
     async createItem() {
       this.createdialog = false
+      let url = '';
 
+      if(this.img){
+        const s3key = new Date().getTime().toString(16) + this.img.name;
+        const result = await Storage.put(s3key, this.img);
+        url = this.$SITE_DOMAIN + result.key;
+      }
+      
       const addItem = {
         item_name: this.name,
-        item_img: this.createData.img,
+        item_img: url,
         category_id: this.category,
         item_price: this.price,
         item_stock: this.stock,
@@ -470,10 +479,26 @@ export default {
     },
     async updateItem(){
       this.editdialog = false
+      
+      if(this.thumbnail) {
+        const putkey = new Date().getTime().toString(16) + this.thumbnail.name;
+        const result = await Storage.put(putkey, this.thumbnail);       
+        const url = this.$SITE_DOMAIN + result.key;
+
+        if(this.edititems.item_img.indexOf(this.$SITE_DOMAIN) === 0){
+          const removeKey = this.edititems.item_img.replace(this.$SITE_DOMAIN, "");
+          await Storage.remove(removeKey);
+        }
+        
+        this.edititems.item_img = url;
+      }
+
+      console.log(this.edititems);
+
       const updateItem = {
         id: this.edititems.id,
         item_name: this.edititems.item_name,
-        // item_img: this.edititems.createData.img,
+        item_img: this.edititems.item_img,
         category_id: this.edititems.category_id,
         item_price: this.edititems.item_price,
         item_stock: this.edititems.item_stock,
@@ -497,7 +522,12 @@ export default {
         id: item.id
       };
       const deleteItem = await API.graphql(graphqlOperation(deleteItems,{input: deleteItemsInput}));
-      console.log(deleteItem)
+      console.log(deleteItem);
+
+      if(item.item_img.indexOf(this.$SITE_DOMAIN) === 0){
+        const removeKey = item.item_img.replace(this.$SITE_DOMAIN, "");
+        await Storage.remove(removeKey);
+      }
       
       await this.getItems()
     },
