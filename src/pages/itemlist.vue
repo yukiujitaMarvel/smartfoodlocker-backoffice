@@ -395,6 +395,12 @@ export default {
       }).catch(error => {
           console.log(error)
       });
+
+      this.name = '',
+      this.createData.img = '',
+      this.category = '',
+      this.price = '',
+      this.stock = '',
       
       await this.getItems();
     },
