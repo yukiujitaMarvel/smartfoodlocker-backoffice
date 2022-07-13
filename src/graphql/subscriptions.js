@@ -129,6 +129,7 @@ export const onCreateCarts = /* GraphQL */ `
       }
       rice_option
       soup_option
+      item_num
       createdAt
       updatedAt
     }
@@ -166,6 +167,7 @@ export const onUpdateCarts = /* GraphQL */ `
       }
       rice_option
       soup_option
+      item_num
       createdAt
       updatedAt
     }
@@ -203,6 +205,7 @@ export const onDeleteCarts = /* GraphQL */ `
       }
       rice_option
       soup_option
+      item_num
       createdAt
       updatedAt
     }
@@ -212,22 +215,8 @@ export const onCreateOrders = /* GraphQL */ `
   subscription OnCreateOrders {
     onCreateOrders {
       id
-      item_id
-      items {
-        id
-        item_img
-        category_id
-        item_name
-        item_price
-        release
-        deleteAt
-        item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
-        createdAt
-        updatedAt
+      order_detail {
+        nextToken
       }
       user_id
       users {
@@ -238,11 +227,11 @@ export const onCreateOrders = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      total_price
+      pickup_place
+      pickup_time
       statas
       lock_flg
-      item_num
-      create_user
-      update_user
       createdAt
       updatedAt
     }
@@ -252,22 +241,8 @@ export const onUpdateOrders = /* GraphQL */ `
   subscription OnUpdateOrders {
     onUpdateOrders {
       id
-      item_id
-      items {
-        id
-        item_img
-        category_id
-        item_name
-        item_price
-        release
-        deleteAt
-        item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
-        createdAt
-        updatedAt
+      order_detail {
+        nextToken
       }
       user_id
       users {
@@ -278,11 +253,11 @@ export const onUpdateOrders = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      total_price
+      pickup_place
+      pickup_time
       statas
       lock_flg
-      item_num
-      create_user
-      update_user
       createdAt
       updatedAt
     }
@@ -292,6 +267,33 @@ export const onDeleteOrders = /* GraphQL */ `
   subscription OnDeleteOrders {
     onDeleteOrders {
       id
+      order_detail {
+        nextToken
+      }
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      total_price
+      pickup_place
+      pickup_time
+      statas
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOrderDetail = /* GraphQL */ `
+  subscription OnCreateOrderDetail {
+    onCreateOrderDetail {
+      id
+      cart_id
       item_id
       items {
         id
@@ -309,20 +311,69 @@ export const onDeleteOrders = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      user_id
-      users {
-        user_id
-        user_name
-        user_email
-        user_number
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrderDetail = /* GraphQL */ `
+  subscription OnUpdateOrderDetail {
+    onUpdateOrderDetail {
+      id
+      cart_id
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
-      statas
-      lock_flg
+      rice_option
+      soup_option
       item_num
-      create_user
-      update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrderDetail = /* GraphQL */ `
+  subscription OnDeleteOrderDetail {
+    onDeleteOrderDetail {
+      id
+      cart_id
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      rice_option
+      soup_option
+      item_num
       createdAt
       updatedAt
     }
