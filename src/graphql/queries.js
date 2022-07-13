@@ -127,6 +127,7 @@ export const getCarts = /* GraphQL */ `
       }
       rice_option
       soup_option
+      item_num
       createdAt
       updatedAt
     }
@@ -153,6 +154,7 @@ export const listCarts = /* GraphQL */ `
         user_id
         rice_option
         soup_option
+        item_num
         createdAt
         updatedAt
       }
@@ -164,22 +166,8 @@ export const getOrders = /* GraphQL */ `
   query GetOrders($id: ID!) {
     getOrders(id: $id) {
       id
-      item_id
-      items {
-        id
-        item_img
-        category_id
-        item_name
-        item_price
-        release
-        deleteAt
-        item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
-        createdAt
-        updatedAt
+      order_detail {
+        nextToken
       }
       user_id
       users {
@@ -190,11 +178,11 @@ export const getOrders = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      total_price
+      pickup_place
+      pickup_time
       statas
       lock_flg
-      item_num
-      create_user
-      update_user
       createdAt
       updatedAt
     }
@@ -217,13 +205,73 @@ export const listOrders = /* GraphQL */ `
     ) {
       items {
         id
-        item_id
         user_id
+        total_price
+        pickup_place
+        pickup_time
         statas
         lock_flg
-        item_num
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOrderDetail = /* GraphQL */ `
+  query GetOrderDetail($id: ID!, $cart_id: ID!) {
+    getOrderDetail(id: $id, cart_id: $cart_id) {
+      id
+      cart_id
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
         create_user
         update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listOrderDetails = /* GraphQL */ `
+  query ListOrderDetails(
+    $id: ID
+    $cart_id: ModelIDKeyConditionInput
+    $filter: ModelOrderDetailFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listOrderDetails(
+      id: $id
+      cart_id: $cart_id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        cart_id
+        item_id
+        rice_option
+        soup_option
+        item_num
         createdAt
         updatedAt
       }
