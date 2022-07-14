@@ -22,6 +22,58 @@
                 </div>
               </div>
             </div>
+            <div class="select-day">
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="date"
+                        label="2022-10-01~2022-10-31 現在"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      no-title
+                      scrollable
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="menu = false"
+                      >
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(date)"
+                      >
+                        OK
+                      </v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-spacer></v-spacer>
+              </v-row>
+            </div>
             <v-card-title>
               <v-text-field
                 v-model="search"
@@ -158,7 +210,7 @@ import '~/assets/css/style.css'
 }
 .dairy p {
   color: orange;
-  font-size: 30px;
+  font-size: 25px;
   margin: 0;
   padding: 10px;
 }
@@ -168,7 +220,7 @@ import '~/assets/css/style.css'
 }
 .monthry p {
   color: #EA5303;
-  font-size: 30px;
+  font-size: 25px;
   margin: 0;
   padding: 10px;
 }
@@ -182,6 +234,9 @@ import '~/assets/css/style.css'
 }
 .dairy-salse-wrap h1{
   color: orange;
+}
+.select-day{
+  padding-left: 10px;
 }
 
 </style>
