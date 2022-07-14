@@ -40,7 +40,7 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                        v-model="date"
+                        v-model="dateRangeText"
                         label="2022-10-01~2022-10-31 現在"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -49,9 +49,10 @@
                       ></v-text-field>
                     </template>
                     <v-date-picker
-                      v-model="date"
+                      v-model="dates"
                       no-title
                       scrollable
+                      range
                     >
                       <v-spacer></v-spacer>
                       <v-btn
@@ -136,6 +137,9 @@ import '~/assets/css/style.css'
     },
     data () {
       return {
+        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        menu: false,
+        dates: ['2022-10-01', '2022-10-31'],
         search: '',
         headers: [
           {
@@ -152,7 +156,13 @@ import '~/assets/css/style.css'
           // { text: '操作', value: 'actions' },
         ],
         desserts: [],
+
       }
+    },
+    computed: {
+      dateRangeText () {
+        return this.dates.join(' ~ ')
+      },
     },
     async created() {
       await this.getOrders()
