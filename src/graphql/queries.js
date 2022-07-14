@@ -181,7 +181,7 @@ export const getOrders = /* GraphQL */ `
       total_price
       pickup_place
       pickup_time
-      statas
+      status
       lock_flg
       createdAt
       updatedAt
@@ -209,7 +209,7 @@ export const listOrders = /* GraphQL */ `
         total_price
         pickup_place
         pickup_time
-        statas
+        status
         lock_flg
         createdAt
         updatedAt
