@@ -83,7 +83,7 @@ import '~/assets/css/style.css'
           { text: '商品数', value: 'item_num' },
           { text: '顧客番号', value: 'user_id' },
           { text: '注文日時', value: 'createdAt' },
-          { text: 'ステータス', value: 'statas' },
+          { text: 'ステータス', value: 'status' },
           { text: '操作', value: 'actions' },
         ],
         desserts: [],
@@ -102,12 +102,12 @@ import '~/assets/css/style.css'
         var status3 = '完了'
 
         orderLists.forEach((value, index) => {
-          if(value.statas == '01') {
-            orderLists[index].statas = status1
-          }else if(value.statas == '02') {
-            orderLists[index].statas = status2
+          if(value.status == '01') {
+            orderLists[index].status = status1
+          }else if(value.status == '02') {
+            orderLists[index].status = status2
           }else {
-            orderLists[index].statas = status3
+            orderLists[index].status = status3
           }
         })
 

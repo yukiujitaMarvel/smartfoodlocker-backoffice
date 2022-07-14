@@ -169,28 +169,8 @@ import '~/assets/css/style.css'
     },
     methods: {
       async getOrders() {
-        const orders = await API.graphql(graphqlOperation(listOrders));
-        const orderLists = orders.data.listOrders.items;
-
-        const earningItem = orderLists.filter((value) => {
-          return value.statas == '03';
-        })
-
-        var status1 = '準備中'
-        var status2 = 'キャンセル'
-        var status3 = '完了'
-
-        earningItem.forEach((value, index) => {
-          if(value.statas == '01') {
-            earningItem[index].statas = status1
-          }else if(value.statas == '02') {
-            earningItem[index].statas = status2
-          }else {
-            earningItem[index].statas = status3
-          }
-        })
-
-        this.desserts = earningItem
+        const orders = await API.graphql(graphqlOperation(listOrders, {filter: {status: {eq: '03'}}}));
+        this.desserts = orders.data.listOrders.items;
       },
       edit(item) {
         console.log(item.name)
