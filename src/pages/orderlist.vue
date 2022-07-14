@@ -7,7 +7,60 @@
           <v-card>
             <div class="order-title">
               <h1>注文状況一覧</h1>
-              <p>2023-10-01-2023-10-31 現在</p>
+              <!-- <p>2023-10-01-2023-10-31 現在</p> -->
+            </div>
+            <div class="select-day">
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+                >
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="dateRangeText"
+                        label="2022-10-01~2022-10-31 現在"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="dates"
+                      no-title
+                      scrollable
+                      range
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="menu = false"
+                      >
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(date)"
+                      >
+                        OK
+                      </v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-spacer></v-spacer>
+              </v-row>
             </div>
             <v-card-title>
               <v-text-field
@@ -71,6 +124,7 @@ import '~/assets/css/style.css'
     },
     data () {
       return {
+        dates: ['2022-10-01', '2022-10-31'],
         search: '',
         headers: [
           {
@@ -89,6 +143,11 @@ import '~/assets/css/style.css'
         desserts: [],
       }
     },
+    computed: {
+      dateRangeText () {
+        return this.dates.join(' ~ ')
+      },
+    },
     async created() {
       await this.getOrders()
     },
@@ -98,16 +157,19 @@ import '~/assets/css/style.css'
         const orderLists = orders.data.listOrders.items;
 
         var status1 = '準備中'
-        var status2 = 'キャンセル'
-        var status3 = '完了'
+        var status2 = '受取待ち'
+        var status3 = '受取完了'
+        var status4 = 'キャンセル'
 
         orderLists.forEach((value, index) => {
           if(value.status == '01') {
             orderLists[index].status = status1
           }else if(value.status == '02') {
             orderLists[index].status = status2
-          }else {
+          }else if(value.status == '03') {
             orderLists[index].status = status3
+          }else {
+            orderLists[index].status = status4
           }
         })
 
@@ -130,6 +192,9 @@ import '~/assets/css/style.css'
 .order-title p{
   font-size: 14px;
   margin-top: 10px;
+}
+.select-day{
+  padding-left: 10px;
 }
 
 </style>
