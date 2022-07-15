@@ -19,12 +19,12 @@
                       <v-btn
                         class="mx-2"
                         fab
-                        dark
+                        light
                         v-bind="attrs"
                         v-on="on"
                         color="orange"
                       >
-                        <v-icon dark>
+                        <v-icon light>
                           mdi-plus
                         </v-icon>
                       </v-btn>
@@ -99,8 +99,8 @@
                       <v-spacer></v-spacer>
                     <div class="item-add-btn">
                         <v-btn
-                          color="warning"
-                          dark
+                          color="secondary"
+                          light
                           @click="createItem"
                         >
                           商品を登録する
@@ -125,7 +125,7 @@
               <div class="my-2" style="margin-left:10px;">
                 <v-btn
                   color="warning"
-                  dark
+                  light
                 >
                   <v-icon
                     middle
@@ -218,8 +218,8 @@
                       <v-spacer></v-spacer>
                     <div class="item-add-btn">
                         <v-btn
-                          color="warning"
-                          dark
+                          color="secondary"
+                          light
                           @click="updateItem()"
                         >
                           商品を更新する

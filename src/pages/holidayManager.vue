@@ -16,7 +16,7 @@
                 <div class="modal-btn">
                   <v-btn
                     color="orange"
-                    dark
+                    light
                     v-bind="attrs"
                     v-on="on"
                   >
@@ -26,12 +26,12 @@
               </template>
               <v-card>
                 <v-toolbar
-                  dark
+                  light
                   color="orange"
                 >
                   <v-btn
                     icon
-                    dark
+                    light
                     @click="dialog = false"
                   >
                     <v-icon>mdi-close</v-icon>
@@ -40,7 +40,7 @@
                   <v-spacer></v-spacer>
                   <v-toolbar-items>
                     <v-btn
-                      dark
+                      light
                       text
                       @click="dialog = false"
                     >
@@ -154,7 +154,7 @@
                             >
                               <v-toolbar
                                 :color="selectedEvent.color"
-                                dark
+                                light
                               >
                                 <v-btn icon>
                                   <v-icon>mdi-pencil</v-icon>

@@ -29,7 +29,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>
@@ -42,7 +42,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>
@@ -55,7 +55,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>
@@ -68,7 +68,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>
@@ -81,7 +81,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>
@@ -94,7 +94,7 @@
                     <div class="my-2">
                       <v-btn
                         color="warning"
-                        dark
+                        light
                       >
                         PDF出力
                       </v-btn>

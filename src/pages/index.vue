@@ -102,7 +102,7 @@
               >
                 <v-toolbar
                   :color="selectedEvent.color"
-                  dark
+                  light
                 >
                   <v-btn icon>
                     <v-icon>mdi-pencil</v-icon>

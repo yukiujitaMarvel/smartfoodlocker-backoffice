@@ -54,7 +54,7 @@
             <a href="/signin">
               <v-btn
                 color="warning"
-                dark
+                light
               >
                 ログインはこちら
               </v-btn>
@@ -91,7 +91,7 @@
           { title: '売上一覧', icon: 'mdi-database-outline', link: '/sales' },
           { title: '各種出力', icon: 'mdi-export-variant', link: '/export' },
           // { title: 'チケット管理', icon: 'mdi-ticket', link: '/ticket' },
-          { title: '設定', icon: 'mdi-cog-outline' },
+          { title: '設定', icon: 'mdi-cog-outline', link: '/setting' },
         ],
         mini: true,
         users: {}
