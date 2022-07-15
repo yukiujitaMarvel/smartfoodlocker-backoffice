@@ -9,16 +9,11 @@ export const createItems = /* GraphQL */ `
     createItems(input: $input, condition: $condition) {
       id
       item_img
-      category_id
       item_name
       item_price
-      release
-      deleteAt
       item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
+      release_day
+      item_detail
       createdAt
       updatedAt
     }
@@ -32,16 +27,11 @@ export const updateItems = /* GraphQL */ `
     updateItems(input: $input, condition: $condition) {
       id
       item_img
-      category_id
       item_name
       item_price
-      release
-      deleteAt
       item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
+      release_day
+      item_detail
       createdAt
       updatedAt
     }
@@ -55,16 +45,11 @@ export const deleteItems = /* GraphQL */ `
     deleteItems(input: $input, condition: $condition) {
       id
       item_img
-      category_id
       item_name
       item_price
-      release
-      deleteAt
       item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
+      release_day
+      item_detail
       createdAt
       updatedAt
     }
@@ -126,16 +111,11 @@ export const createCarts = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -167,16 +147,11 @@ export const updateCarts = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -208,16 +183,11 @@ export const deleteCarts = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -245,41 +215,24 @@ export const createOrders = /* GraphQL */ `
   ) {
     createOrders(input: $input, condition: $condition) {
       id
-      order_detail {
-        items {
-          id
-          cart_id
-          item_id
-          items {
-            id
-            item_img
-            category_id
-            item_name
-            item_price
-            release
-            deleteAt
-            item_stock
-            create_user
-            update_user
-            delete_user
-            logical_deletion_flg
-            createdAt
-            updatedAt
-          }
-          rice_option
-          soup_option
-          item_num
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        item_name
+        item_price
+        item_stock
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -300,41 +253,24 @@ export const updateOrders = /* GraphQL */ `
   ) {
     updateOrders(input: $input, condition: $condition) {
       id
-      order_detail {
-        items {
-          id
-          cart_id
-          item_id
-          items {
-            id
-            item_img
-            category_id
-            item_name
-            item_price
-            release
-            deleteAt
-            item_stock
-            create_user
-            update_user
-            delete_user
-            logical_deletion_flg
-            createdAt
-            updatedAt
-          }
-          rice_option
-          soup_option
-          item_num
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        item_name
+        item_price
+        item_stock
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -355,41 +291,24 @@ export const deleteOrders = /* GraphQL */ `
   ) {
     deleteOrders(input: $input, condition: $condition) {
       id
-      order_detail {
-        items {
-          id
-          cart_id
-          item_id
-          items {
-            id
-            item_img
-            category_id
-            item_name
-            item_price
-            release
-            deleteAt
-            item_stock
-            create_user
-            update_user
-            delete_user
-            logical_deletion_flg
-            createdAt
-            updatedAt
-          }
-          rice_option
-          soup_option
-          item_num
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        item_name
+        item_price
+        item_stock
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -415,16 +334,11 @@ export const createOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -448,16 +362,11 @@ export const updateOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -481,16 +390,11 @@ export const deleteOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -596,6 +500,57 @@ export const deleteTickets = /* GraphQL */ `
       expiry
       create_user
       update_user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSchedules = /* GraphQL */ `
+  mutation CreateSchedules(
+    $input: CreateSchedulesInput!
+    $condition: ModelSchedulesConditionInput
+  ) {
+    createSchedules(input: $input, condition: $condition) {
+      id
+      merchant_id
+      holiday_flg
+      date
+      start_time
+      finish_time
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSchedules = /* GraphQL */ `
+  mutation UpdateSchedules(
+    $input: UpdateSchedulesInput!
+    $condition: ModelSchedulesConditionInput
+  ) {
+    updateSchedules(input: $input, condition: $condition) {
+      id
+      merchant_id
+      holiday_flg
+      date
+      start_time
+      finish_time
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSchedules = /* GraphQL */ `
+  mutation DeleteSchedules(
+    $input: DeleteSchedulesInput!
+    $condition: ModelSchedulesConditionInput
+  ) {
+    deleteSchedules(input: $input, condition: $condition) {
+      id
+      merchant_id
+      holiday_flg
+      date
+      start_time
+      finish_time
       createdAt
       updatedAt
     }
