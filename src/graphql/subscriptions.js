@@ -216,6 +216,32 @@ export const onCreateOrders = /* GraphQL */ `
     onCreateOrders {
       id
       order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       user_id
@@ -242,6 +268,32 @@ export const onUpdateOrders = /* GraphQL */ `
     onUpdateOrders {
       id
       order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       user_id
@@ -268,6 +320,32 @@ export const onDeleteOrders = /* GraphQL */ `
     onDeleteOrders {
       id
       order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       user_id
