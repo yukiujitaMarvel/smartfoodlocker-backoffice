@@ -53,18 +53,30 @@
                           </div>
                           <span class="select-image" v-else>選択されていません</span>
                         </div>
-                        <v-row align="center">
-                        <v-col cols="12">
-                          <v-select
-                            v-model="category"
-                            label="カテゴリ名"
-                            :items="items"
-                            item-text="name"
-                            item-value="value"
-                            required>
-                          ></v-select>
-                        </v-col>
-                        </v-row>
+                        <!--<v-row align="center">
+                          <v-col cols="12">
+                              <v-select
+                                v-model="category"
+                                label="カテゴリ名"
+                                :items="items"
+                                item-text="name"
+                                item-value="value"
+                                required>
+                              ></v-select>
+                          </v-col>
+                        </v-row>-->
+                        <v-textarea
+                          v-model="detail"
+                          label="内容説明"
+                          :rules="rules"
+                          hide-details="auto"
+                        ></v-textarea>
+                        <v-text-field
+                          v-model="releaseDay"
+                          label="提供日"
+                          :rules="rules"
+                          hide-details="auto"
+                        ></v-text-field>
                         <v-text-field
                           v-model="price"
                           label="値段"
@@ -78,7 +90,7 @@
                         ></v-select>
                         <v-container fluid>
                 
-                        <v-radio-group
+                        <!--<v-radio-group
                           v-model="createrelease"
                           row
                         >
@@ -90,7 +102,7 @@
                             label="非公開"
                             v-bind:value='false'
                           ></v-radio>
-                        </v-radio-group>
+                        </v-radio-group>-->
 
                       </v-container>
                       </div>
@@ -173,7 +185,7 @@
                             <span class="select-image" v-else>選択されていません</span>
                           </div>
                         </div>
-                        <v-row align="center">
+                        <!--<v-row align="center">
                           <v-col cols="12">
                           <v-select
                             v-model="edititems.category_id"
@@ -184,10 +196,23 @@
                             required>
                           ></v-select>
                           </v-col>
-                        </v-row>
+                        </v-row>-->
+                        <v-textarea
+                          v-model="edititems.item_detail"
+                          label="内容説明"
+                          :rules="rules"
+                          hide-details="auto"
+                        ></v-textarea>
+                        <v-text-field
+                          v-model="edititems.release_day"
+                          label="提供日"
+                          :rules="rules"
+                          hide-details="auto"
+                        ></v-text-field>
                         <v-text-field
                           v-model="edititems.item_price"
                           label="値段"
+                          :rules="rules"
                           hide-details="auto"
                         ></v-text-field>
                         <v-select
@@ -195,7 +220,7 @@
                           :items="num_items"
                           label="数"
                         ></v-select>
-                        <v-container fluid>
+                        <!--<v-container fluid>
                 
                         <v-radio-group
                           v-model="edititems.release"
@@ -211,7 +236,7 @@
                           ></v-radio>
                         </v-radio-group>
 
-                      </v-container>
+                      </v-container>-->
                       </div>
                     </v-card-text>
                     <v-card-actions>
@@ -310,10 +335,12 @@ export default {
       createData: {
         img: '',
       },
-      category: '',
+      //category: '',
+      detail: '',
       price: '',
       num_items: numRange,
       stock: '',
+      releaseDay: '',
       createrelease: true,
       create_at: "",
       update_at: "",
@@ -330,20 +357,20 @@ export default {
           value: 'id',
         },
         { text: '画像', value: 'item_img' },
-        { text: 'カテゴリ', value: 'category_id' },
         { text: '商品名', value: 'item_name' },
         { text: '値段(税込み)', value: 'item_price' },
         { text: '在庫', value: 'item_stock' },
-        { text: '公開・非公開', value: 'release' },
+        { text: '提供日', value: 'release_day' },
+        { text: '商品説明', value: 'item_detail' },        
         { text: '操作', value: 'actions' },
       ],
       desserts: [],
-      items: [
+      /*items: [
         {name:'弁当', value:'01'},
         {name:'サンドイッチ', value:'02'},
         {name:'サラダ', value:'03'},
         {name:'スープ', value:'04'}
-      ],
+      ],*/
       edititems: [],
       release: true,
       editData: {
@@ -383,10 +410,10 @@ export default {
       const addItem = {
         item_name: this.name,
         item_img: url,
-        category_id: this.category,
         item_price: this.price,
         item_stock: this.stock,
-        release: this.createrelease
+        release_day: this.releaseDay,
+        item_detail: this.detail,
       };
       await API.graphql(graphqlOperation(createItems, {input: addItem}))
       .then(response => {
@@ -398,7 +425,8 @@ export default {
 
       this.name = '',
       this.createData.img = '',
-      this.category = '',
+      this.detail = '',
+      this.releaseDay = '',
       this.price = '',
       this.stock = '',
       
@@ -410,7 +438,7 @@ export default {
       const items = await API.graphql(graphqlOperation(listItems));
       const itemLists = items.data.listItems.items;
 
-      var category_name1 = '弁当'
+      /*var category_name1 = '弁当'
       var category_name2 = 'サンドイッチ'
       var category_name3 = 'サラダ'
       var category_name4 = 'スープ'
@@ -433,7 +461,7 @@ export default {
         } else {
           itemLists[index].release = '非公開'
         }
-      })
+      })*/
 
       this.desserts = itemLists
       // console.log(this.desserts)
@@ -448,7 +476,7 @@ export default {
     async editItem(item){
       this.editdialog = true
 
-      if(item.category_id == '弁当'){
+      /*if(item.category_id == '弁当'){
         item.category_id = '01'
       }else if (item.category_id == 'サンドイッチ'){
         item.category_id = '02'
@@ -462,7 +490,7 @@ export default {
         item.release = true
       }else {
         item.release = false
-      }
+      }*/
 
       this.edititems = Object.assign({}, item)
       
@@ -505,10 +533,10 @@ export default {
         id: this.edititems.id,
         item_name: this.edititems.item_name,
         item_img: this.edititems.item_img,
-        category_id: this.edititems.category_id,
         item_price: this.edititems.item_price,
         item_stock: this.edititems.item_stock,
-        release: this.edititems.release,
+        release_day: this.edititems.releaseDay,
+        item_detail: this.edititems.detail,        
       };
       await API.graphql(graphqlOperation(updateItems, {input: updateItem}))
       .then(response => {
