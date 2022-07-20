@@ -71,12 +71,53 @@
                           :rules="rules"
                           hide-details="auto"
                         ></v-textarea>
-                        <v-text-field
+                        <v-menu
+                          ref="addmenu"
+                          v-model="addmenu"
+                          :close-on-content-click="false"
+                          :return-value.sync="adddate"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="adddate"
+                              label="提供日"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="adddate"
+                            no-title
+                            scrollable
+                          >
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              text
+                              color="primary"
+                              @click="addmenu = false"
+                            >
+                              Cancel
+                            </v-btn>
+                            <v-btn
+                              text
+                              color="primary"
+                              @click="$refs.addmenu.save(adddate)"
+                            >
+                              OK
+                            </v-btn>
+                          </v-date-picker>
+                        </v-menu>
+                        <!-- <v-text-field
                           v-model="releaseDay"
                           label="提供日"
                           :rules="rules"
                           hide-details="auto"
-                        ></v-text-field>
+                        ></v-text-field> -->
                         <v-text-field
                           v-model="price"
                           label="値段"
@@ -203,12 +244,53 @@
                           :rules="rules"
                           hide-details="auto"
                         ></v-textarea>
-                        <v-text-field
+                        <v-menu
+                          ref="editmenu"
+                          v-model="editmenu"
+                          :close-on-content-click="false"
+                          :return-value.sync="edititems.release_day"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="edititems.release_day"
+                              label="提供日"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="editdate"
+                            no-title
+                            scrollable
+                          >
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              text
+                              color="primary"
+                              @click="editmenu = false"
+                            >
+                              Cancel
+                            </v-btn>
+                            <v-btn
+                              text
+                              color="primary"
+                              @click="$refs.editmenu.save(editdate)"
+                            >
+                              OK
+                            </v-btn>
+                          </v-date-picker>
+                        </v-menu>
+                        <!-- <v-text-field
                           v-model="edititems.release_day"
                           label="提供日"
                           :rules="rules"
                           hide-details="auto"
-                        ></v-text-field>
+                        ></v-text-field> -->
                         <v-text-field
                           v-model="edititems.item_price"
                           label="値段"
@@ -331,6 +413,11 @@ export default {
       createdialog: false,
       search: '',
 
+      adddate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      addmenu: false,
+      editdate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      editmenu: false,
+
       name: '',
       createData: {
         img: '',
@@ -412,7 +499,8 @@ export default {
         item_img: url,
         item_price: this.price,
         item_stock: this.stock,
-        release_day: this.releaseDay,
+        release_day: this.adddate,
+        // release_day: this.releaseDay,
         item_detail: this.detail,
       };
       await API.graphql(graphqlOperation(createItems, {input: addItem}))
@@ -493,6 +581,8 @@ export default {
       }*/
 
       this.edititems = Object.assign({}, item)
+
+      console.log(this.edititems)
       
       await this.getItems();
     },
@@ -535,7 +625,8 @@ export default {
         item_img: this.edititems.item_img,
         item_price: this.edititems.item_price,
         item_stock: this.edititems.item_stock,
-        release_day: this.edititems.releaseDay,
+        release_day: this.edititems.release_day,
+        // release_day: this.edititems.releaseDay,
         item_detail: this.edititems.detail,        
       };
       await API.graphql(graphqlOperation(updateItems, {input: updateItem}))
