@@ -4,6 +4,7 @@
       v-model="drawer"
       :mini-variant.sync="mini"
       permanent
+      class="navbar"
     >
       <v-list-item class="px-2">
           <v-list-item-avatar>
