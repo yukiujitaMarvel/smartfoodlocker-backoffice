@@ -4,7 +4,7 @@
     <v-card class="right-wrap" >
       <h1>設定</h1>
       <div>
-        <p class="subTitle_com">登録情報</p>
+        <p class="subTitle"><v-icon>mdi-account</v-icon>登録情報</p>
         <div>
           <v-row>
             <v-col
@@ -18,21 +18,6 @@
               >
               </v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <v-text-field
-              dense
-              label="住所"
-              >
-              </v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
             <v-col
               cols="12"
               sm="6"
@@ -49,6 +34,19 @@
             <v-col
               cols="12"
               sm="6"
+              md="8"
+            >
+              <v-text-field
+              dense
+              label="住所"
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="6"
               md="4"
             >
               <v-text-field
@@ -57,8 +55,6 @@
               >
               </v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
             <v-col
               cols="12"
               sm="6"
@@ -71,26 +67,19 @@
               </v-text-field>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <v-text-field
-              dense
-              label="企業名"
-              >
-              </v-text-field>
-            </v-col>
-          </v-row>
         </div>
       </div>
       <div>
-        <p class="subTitle_time">提供時間情報</p>
-        <div>
+        <p class="subTitle"><v-icon>mdi-av-timer</v-icon>提供時間情報</p>
+        <div class="weekTime">
           <v-row>
-            <v-col>月曜日</v-col>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              月曜日
+            </v-col>
             <v-col>
               <template>
                 <vue-timepicker
@@ -106,11 +95,11 @@
                 </vue-timepicker>
               </template>
             </v-col>
-            <v-col>~</v-col>
+            <v-col class="center">~</v-col>
             <v-col>
               <template>
                 <vue-timepicker
-                  placeholder="開始時間"
+                  placeholder="終了時間"
                   format="HH:mm"
                   hour-label="時"
                   minute-label="分"
@@ -124,7 +113,12 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>火曜日</v-col>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+            火曜日</v-col>
             <v-col>
               <template>
                 <vue-timepicker
@@ -140,45 +134,11 @@
                 </vue-timepicker>
               </template>
             </v-col>
-            <v-col>~</v-col>
+            <v-col class="center">~</v-col>
             <v-col>
               <template>
                 <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>水曜日</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-            <v-col>~</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
+                  placeholder="終了時間"
                   format="HH:mm"
                   hour-label="時"
                   minute-label="分"
@@ -192,7 +152,13 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>木曜日</v-col>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              水曜日
+            </v-col>
             <v-col>
               <template>
                 <vue-timepicker
@@ -208,45 +174,11 @@
                 </vue-timepicker>
               </template>
             </v-col>
-            <v-col>~</v-col>
+            <v-col class="center">~</v-col>
             <v-col>
               <template>
                 <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>金曜日</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-            <v-col>~</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
+                  placeholder="終了時間"
                   format="HH:mm"
                   hour-label="時"
                   minute-label="分"
@@ -260,7 +192,13 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>土曜日</v-col>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              木曜日
+            </v-col>
             <v-col>
               <template>
                 <vue-timepicker
@@ -276,45 +214,11 @@
                 </vue-timepicker>
               </template>
             </v-col>
-            <v-col>~</v-col>
+            <v-col class="center">~</v-col>
             <v-col>
               <template>
                 <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>日曜日</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
-                  format="HH:mm"
-                  hour-label="時"
-                  minute-label="分"
-                  minute-interval="15"
-                  hide-dropdown
-                  auto-scroll
-                  close-on-complete
-                  >
-                </vue-timepicker>
-              </template>
-            </v-col>
-            <v-col>~</v-col>
-            <v-col>
-              <template>
-                <vue-timepicker
-                  placeholder="開始時間"
+                  placeholder="終了時間"
                   format="HH:mm"
                   hour-label="時"
                   minute-label="分"
@@ -328,7 +232,13 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col>祝日</v-col>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              金曜日
+            </v-col>
             <v-col>
               <template>
                 <vue-timepicker
@@ -344,11 +254,131 @@
                 </vue-timepicker>
               </template>
             </v-col>
-            <v-col>~</v-col>
+            <v-col class="center">~</v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="終了時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              土曜日
+            </v-col>
             <v-col>
               <template>
                 <vue-timepicker
                   placeholder="開始時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+            <v-col class="center">~</v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="終了時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              日曜日
+            </v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="開始時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+            <v-col class="center">~</v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="終了時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col 
+            v-for="align in alignments"
+            :key="align"
+            :align-self="align"
+            >
+              祝日
+            </v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="開始時間"
+                  format="HH:mm"
+                  hour-label="時"
+                  minute-label="分"
+                  minute-interval="15"
+                  hide-dropdown
+                  auto-scroll
+                  close-on-complete
+                  >
+                </vue-timepicker>
+              </template>
+            </v-col>
+            <v-col class="center">~</v-col>
+            <v-col>
+              <template>
+                <vue-timepicker
+                  placeholder="終了時間"
                   format="HH:mm"
                   hour-label="時"
                   minute-label="分"
@@ -387,7 +417,12 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
     components: {
       'vue-timepicker': VueTimepicker,
     },
-  //   data () {
+    data: () => ({
+      alignments: [
+        'center',
+      ]
+    }),
+  // data () {
   //   return {
   //     dialog: false,
   //     search: '',
@@ -417,14 +452,32 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
 </script>
 
 <style scoped>
-.subTitle_com::before {
-  content: "\F0991";
-}
-.subTitle_time::before {
-  content: "\f007";
-}
 .right-wrap{
   padding: 20px 20px;
+}
+
+.subTitle {
+  margin-top: 20px;
+  color: #EA5303;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.mdi-account::before , .mdi-av-timer::before {
+  color: #EA5303;
+}
+
+.weekTime{
+  max-width: 60%;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  max-width: 20px !important;
 }
 
 .my-time-picker >>> .vue__time-picker .dropdown ul li:not([disabled]).active,
