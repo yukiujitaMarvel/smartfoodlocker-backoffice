@@ -84,52 +84,77 @@
               :events="events"
               :event-color="getEventColor"
               :type="type"
-              
+              @click:event="showEvent"
               @click:more="viewDay"
               @click:date="viewDay"
               @change="updateRange"
             ></v-calendar>
-            <v-menu
-              v-model="selectedOpen"
-              :close-on-content-click="false"
-              :activator="selectedElement"
-              offset-x
-            >
-              <v-card
-                color="grey lighten-4"
-                min-width="350px"
-                flat
+
+            <v-row justify="center">
+              <v-dialog
+                v-model="adddialog"
+                persistent
+                max-width="290"
               >
-                <v-toolbar
-                  :color="selectedEvent.color"
-                  light
-                >
-                  <v-btn icon>
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-btn icon>
-                    <v-icon>mdi-heart</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </v-toolbar>
-                <v-card-text>
-                  <span v-html="selectedEvent.details"></span>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn
-                    text
-                    color="secondary"
-                    @click="selectedOpen = false"
-                  >
-                    Cancel
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-menu>
+                <v-card>
+                  <h5>{{ selectedday }}を「休み」として登録してもよろしいですか？</h5>
+                  <v-card-actions>
+                    <div class="cansel-btn-wrap">
+                      <button
+                        color="green darken-1"
+                        text
+                        class="back-btn"
+                        @click="adddialog = false"
+                      >
+                        いいえ
+                      </button>
+                      <button
+                        color="green darken-1"
+                        text
+                        class="cancel-btn"
+                        @click="createSchedule"
+                      >
+                        はい
+                      </button>
+                    </div>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+
+            <v-row justify="center">
+              <v-dialog
+                v-model="deletedialog"
+                persistent
+                max-width="290"
+              >
+                <v-card>
+                  <h5>{{ eventday.start }}の「休み」を削除してもよろしいですか？</h5>
+                  <v-card-actions>
+                    <div class="cansel-btn-wrap">
+                      <button
+                        color="green darken-1"
+                        text
+                        class="back-btn"
+                        @click="deletedialog = false"
+                      >
+                        いいえ
+                      </button>
+                      <button
+                        color="green darken-1"
+                        text
+                        class="cancel-btn"
+                        @click="deleteSchedule"
+                      >
+                        はい
+                      </button>
+                    </div>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-row>
+
+
           </v-sheet>
         </v-col>
       </v-row>
@@ -141,6 +166,9 @@
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 import { Hub } from 'aws-amplify'
+import { API, graphqlOperation, Storage} from 'aws-amplify'
+import { listSchedules } from '../graphql/queries'
+import { createSchedules, deleteSchedules } from '../graphql/mutations'
 
 export default {
   head() {
@@ -149,6 +177,8 @@ export default {
     }
   },
   data: () => ({
+    adddialog: false,
+    deletedialog: false,
     focus: '',
     type: 'month',
     typeToLabel: {
@@ -157,60 +187,12 @@ export default {
       day: 'Day',
       '4day': '4 Days',
     },
+    selectedday: '',
+    eventday: '',
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [
-      {
-          name: '休み',
-          start: '2022-06-04 09:00',
-          end: '2022-06-05 17:00',
-          color: 'grey darken-1'
-      },
-      {
-          name: '休み',
-          start: '2022-06-11 09:00',
-          end: '2022-06-12 17:00',
-          color: 'grey darken-1'
-      },
-      {
-          name: '休み',
-          start: '2022-06-18 09:00',
-          end: '2022-06-19 17:00',
-          color: 'grey darken-1'
-      },
-      {
-          name: '休み',
-          start: '2022-06-25 09:00',
-          end: '2022-06-26 17:00',
-          color: 'grey darken-1'
-      },
-      {
-          name: 'クリームパン 他　50個',
-          start: '2022-06-01 09:00',
-          end: '2022-06-01 17:00',
-          color: 'orange'
-      },
-      {
-          name: 'たまごパン 他　20個',
-          start: '2022-06-07 09:00',
-          end: '2022-06-07 17:00',
-          color: 'orange'
-      },
-      {
-          name: 'コッペパン 他　45個',
-          start: '2022-06-17 09:00',
-          end: '2022-06-17 17:00',
-          color: 'orange'
-      },
-      {
-          name: 'あんパン 他　100個',
-          start: '2022-06-27 09:00',
-          end: '2022-06-27 17:00',
-          color: 'orange'
-      },
-      
-    ],
+    events: [],
     colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
     names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
   }),
@@ -226,10 +208,47 @@ export default {
   mounted () {
     this.$refs.calendar.checkChange()
   },
+  async created() {
+    await this.getSchedule();
+  },
   methods: {
+    async getSchedule(){
+      const schedules = await API.graphql(graphqlOperation(listSchedules));
+      const scheduleLists = schedules.data.listSchedules.items;
+
+      scheduleLists.forEach((value) => {
+        value.name = "休日"
+        value.color = 'grey darken-1'
+        value.start = value.date
+        delete value.date
+      })
+
+      // console.log(scheduleLists)
+      this.events = scheduleLists
+
+      this.getSchedule()
+    },
+    async createSchedule(){
+      this.adddialog = false
+
+      const addschedule = {
+        merchant_id: 'aaa',
+        date: this.selectedday,
+      }
+      await API.graphql(graphqlOperation(createSchedules, {input: addschedule}))
+      .then(response => {
+          console.log(response);
+          
+      }).catch(error => {
+          console.log(error)
+      });
+    },
     viewDay ({ date }) {
-      this.focus = date
-      this.type = 'day'
+      this.adddialog = true
+
+      this.selectedday = date
+      // this.focus = date
+      // this.type = 'day'
     },
     getEventColor (event) {
       return event.color
@@ -257,52 +276,26 @@ export default {
       if(data.payload.event == 'signOut') {
         this.$router.push('/signin')
       }
-    }
-    // showEvent ({ nativeEvent, event }) {
-    //   const open = () => {
-    //     this.selectedEvent = event
-    //     this.selectedElement = nativeEvent.target
-    //     requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
-    //   }
+    },
+    showEvent ({ event }) {
+      this.deletedialog = true;
 
-    //   if (this.selectedOpen) {
-    //     this.selectedOpen = false
-    //     requestAnimationFrame(() => requestAnimationFrame(() => open()))
-    //   } else {
-    //     open()
-    //   }
+      this.eventday = event;
+    },
+    async deleteSchedule() {
+      // console.log(this.eventday)
+      this.deletedialog = false
 
-    //   nativeEvent.stopPropagation()
-    // },
-    // updateRange ({ start, end }) {
-    //   const events = []
+      const deleteScheduleInput = {
+        id: this.eventday.id
+      };
+      const deleteSchedule = await API.graphql(graphqlOperation(deleteSchedules,{input: deleteScheduleInput}));
+      // console.log(deleteSchedule);
 
-    //   const min = new Date(`${start.date}T00:00:00`)
-    //   const max = new Date(`${end.date}T23:59:59`)
-    //   const days = (max.getTime() - min.getTime()) / 86400000
-    //   const eventCount = this.rnd(days, days + 20)
-
-    //   for (let i = 0; i < eventCount; i++) {
-    //     const allDay = this.rnd(0, 3) === 0
-    //     const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-    //     const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-    //     const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-    //     const second = new Date(first.getTime() + secondTimestamp)
-
-    //     events.push({
-    //       name: this.names[this.rnd(0, this.names.length - 1)],
-    //       start: first,
-    //       end: second,
-    //       color: this.colors[this.rnd(0, this.colors.length - 1)],
-    //       timed: !allDay,
-    //     })
-    //   }
-
-    //   this.events = events
-    // },
-    // rnd (a, b) {
-    //   return Math.floor((b - a + 1) * Math.random()) + a
-    // },
+      this.getSchedule();
+    },
+    
+    
   },
 }
 </script>
@@ -319,5 +312,50 @@ export default {
 }
 .v-event-summary strong {
   display: none;
+}
+.v-card__actions{
+  display: block;
+  text-align: center;
+}
+.cansel-btn-wrap{
+  padding: 10px;
+}
+.back-btn{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  color: orange;
+  padding: 10px 20px 10px 20px;
+  margin-right: 30px;
+}
+.back-btn:hover{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+}
+.cancel-btn{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  width: 85px;
+  padding: 10px;
+}
+.cancel-btn:hover{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: white;
+  color: orange;
+  padding: 10px;
+}
+h5{
+  padding: 30px;
 }
 </style>
