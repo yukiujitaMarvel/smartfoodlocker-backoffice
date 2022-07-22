@@ -1,27 +1,26 @@
 <template>
   <v-card>
     <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant.sync="mini"
       permanent
+      expand-on-hover
       class="navbar"
     >
+        <a href="/">
       <v-list-item class="px-2">
           <v-list-item-avatar>
-            <a href="/">
               <v-icon>mdi-locker-multiple</v-icon>
-            </a>
           </v-list-item-avatar>
 
           <v-list-item-title>Smart food locker</v-list-item-title>
 
-          <v-btn
+          <!-- <v-btn
             icon
             @click.stop="mini = !mini"
           >
             <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
+          </v-btn> -->
       </v-list-item>
+            </a>
 
       <v-divider></v-divider>
 
@@ -64,9 +63,7 @@
         </v-list-item>
         <div class="conpany-inner-wrap">
           <v-list-item class="px-2">
-            <v-list-item-avatar>
-              <v-icon>mdi-office-building</v-icon>
-            </v-list-item-avatar>
+              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24" fill="#fff">
             <v-list-item-title>{{ users.username }}</v-list-item-title>
               <v-btn icon>
                 <v-icon>mdi-dots-vertical</v-icon>
@@ -98,7 +95,7 @@
         users: {}
       }
     },
-     async created() {
+    async created() {
     await this.getUser()
     },
     methods: {
@@ -162,5 +159,6 @@ a {
 .v-btn:not(.v-btn--round).v-size--default {
   font-weight: bold !important;
 }
+
 
 </style>
