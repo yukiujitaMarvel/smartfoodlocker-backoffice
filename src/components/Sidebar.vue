@@ -2,25 +2,25 @@
   <v-card>
     <v-navigation-drawer
       permanent
-      expand-on-hover
       class="navbar"
+      expand-on-hover
     >
-        <a href="/">
-      <v-list-item class="px-2">
+      <a href="/">
+        <v-list-item class="px-2">
           <v-list-item-avatar>
-              <v-icon>mdi-locker-multiple</v-icon>
+            <v-icon>mdi-locker-multiple</v-icon>
           </v-list-item-avatar>
 
           <v-list-item-title>Smart food locker</v-list-item-title>
 
-          <!-- <v-btn
-            icon
-            @click.stop="mini = !mini"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn> -->
-      </v-list-item>
-            </a>
+            <!-- <v-btn
+              icon
+              @click.stop="mini = !mini"
+            >
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn> -->
+        </v-list-item>
+      </a>
 
       <v-divider></v-divider>
 
@@ -43,27 +43,26 @@
 
       <div class="conpany-wrap">
         <v-list-item class="px-2" v-if="Object.keys(users).length">
-          <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title>
+          <!-- <v-list-item-avatar></v-list-item-avatar>
+          <v-list-item-title></v-list-item-title> -->
           <amplify-sign-out></amplify-sign-out>
+          <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
         </v-list-item>
         <v-list-item class="px-2" v-else>
-          <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title>
-          <div class="my-2">
+          <!-- <v-list-item-avatar></v-list-item-avatar> -->
+          <!-- <v-list-item-title></v-list-item-title> -->
+          <div class="singinBtn">
             <a href="/signin">
-              <v-btn
-                color="warning"
-                light
-              >
-                ログインはこちら
+              <v-btn light>
+                <img src="@/assets/img/login.png" alt="logInIcon" width="24" height="24">
+                <p>ログイン/新規登録</p>
               </v-btn>
             </a>
           </div>
         </v-list-item>
         <div class="conpany-inner-wrap">
           <v-list-item class="px-2">
-              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24" fill="#fff">
+              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
             <v-list-item-title>{{ users.username }}</v-list-item-title>
               <v-btn icon>
                 <v-icon>mdi-dots-vertical</v-icon>
@@ -160,5 +159,23 @@ a {
   font-weight: bold !important;
 }
 
+/* edit yajima */
+.singinBtn {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.singinBtn img {
+  margin-right: 10px;
+}
+.singinBtn p {
+  color: #EA5303 !important;
+  margin: 0 !important;
+}
+.v-btn:not(.v-btn--round).v-size--default[data-v-472a545e] {
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  width: 100%;
+}
 
 </style>
