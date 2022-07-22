@@ -74,7 +74,7 @@
               <div class="my-2" style="margin-left:10px;">
                 <v-btn
                   color="warning"
-                  dark
+                  light
                 >
                   <v-icon
                     middle
