@@ -12,13 +12,13 @@
               <div class="salse-wrap dairy-salse-wrap">
                 <h1>DAIRY</h1>
                 <div class="dairy">
-                  <p>¥239,000</p>
+                  <p>{{ today_price }}</p>
                 </div>
               </div>
               <div class="salse-wrap">
                 <h1>MONTHRY</h1>
                 <div class="monthry">
-                  <p>¥1,239,000</p>
+                  <p>{{ month_price }}</p>
                 </div>
               </div>
             </div>
@@ -141,6 +141,8 @@ import '~/assets/css/style.css'
         menu: false,
         dates: ['2022-10-01', '2022-10-31'],
         search: '',
+        today_price: '',
+        month_price: '',
         headers: [
           {
             text: '注文番号',
@@ -171,6 +173,38 @@ import '~/assets/css/style.css'
       async getOrders() {
         const orders = await API.graphql(graphqlOperation(listOrders, {filter: {status: {eq: '03'}}}));
         this.desserts = orders.data.listOrders.items;
+
+        let td = new Date();
+        let y = td.getFullYear();
+        let m = td.getMonth() + 1;
+        let d = td.getDate();
+
+        const today = (y + '-' + m + '-' + d);
+        const month = (y + '-' + m);
+
+        let today_total_price = 0;
+        let month_total_price = 0;
+
+        this.desserts.forEach((value) => {
+          let d_day = new Date(value.createdAt);
+          let d_y = d_day.getFullYear();
+          let d_m = d_day.getMonth() + 1;
+          let d_d = d_day.getDate();
+
+          const d_today = (d_y + '-' + d_m + '-' + d_d)
+          const d_month = (d_y + '-' + d_m)
+
+          if(d_today == today) {
+            today_total_price = today_total_price + value.total_price;
+          }
+          if(d_month == month) {
+            month_total_price = month_total_price + value.total_price
+          }
+        })
+
+        this.today_price = today_total_price.toLocaleString('ja-JP', {style:'currency', currency: 'JPY'});
+        this.month_price = month_total_price.toLocaleString('ja-JP', {style:'currency', currency: 'JPY'});
+
       },
       edit(item) {
         console.log(item.name)
