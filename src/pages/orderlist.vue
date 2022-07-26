@@ -94,7 +94,7 @@
               <template v-slot:item="props">
                 <tr :class="{'notReceave': props.item.status === '未受取'}">
                   <td>{{props.item.id}}</td>
-                  <td>{{props.item.item_id}}</td>
+                  <td>{{props.item.items.item_name}}</td>
                   <td>{{props.item.user_id}}</td>
                   <td>{{props.item.createdAt}}</td>
                   <td>{{props.item.status}}</td>
@@ -142,13 +142,17 @@ import '~/assets/css/style.css'
             filterable: false,
             value: 'id',
           },
-          { text: '商品名', value: 'item_id' },
+          { text: '商品名', value: 'item_name' },
           { text: '顧客番号', value: 'user_id' },
           { text: '注文日時', value: 'createdAt' },
           { text: 'ステータス', value: 'status' },
           // { text: '操作', value: 'actions' },
         ],
-        desserts: [],
+        desserts: [{
+          items: {
+            item_name: '',
+          }
+        }],
       }
     },
     computed: {
@@ -161,7 +165,11 @@ import '~/assets/css/style.css'
     },
     methods: {
       async getOrders() {
-        const orders = await API.graphql(graphqlOperation(listOrders));
+        const orders = await API.graphql(
+          graphqlOperation(
+            listOrders
+          )
+        );
         const orderLists = orders.data.listOrders.items;
 
         var status1 = '準備中'
