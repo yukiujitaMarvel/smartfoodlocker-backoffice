@@ -39,35 +39,34 @@
           </v-list-item-content>
 
         </v-list-item>
+
+        <v-list-item v-if="Object.keys(users).length"
+        class="navBar_btm singoutBtn"
+        >
+        <!-- <amplify-sign-out></amplify-sign-out> -->
+        <!-- <a href="/signout"> -->
+            <v-listitem-icon>
+              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
+            </v-listitem-icon>
+            <v-list-item-title>ログアウト</v-list-item-title>
+        <!-- </a> -->
+        </v-list-item>
+        <v-list-item v-else
+        class="navBar_btm singinBtn" 
+        >
+            <v-listitem-icon>
+              <img src="@/assets/img/login.png" alt="logOutIcon" width="24" height="24">
+            </v-listitem-icon>
+            <v-list-item-title>ログイン/新規登録</v-list-item-title>
+        </v-list-item>
       </v-list>
 
-      <div class="conpany-wrap">
-        <v-list-item class="px-2" v-if="Object.keys(users).length">
-          <!-- <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title> -->
-          <amplify-sign-out></amplify-sign-out>
-          <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
-        </v-list-item>
-        <v-list-item class="px-2" v-else>
-          <!-- <v-list-item-avatar></v-list-item-avatar> -->
-          <!-- <v-list-item-title></v-list-item-title> -->
-          <div class="singinBtn">
-            <a href="/signin">
-              <v-btn light>
-                <img src="@/assets/img/login.png" alt="logInIcon" width="24" height="24">
-                <p>ログイン/新規登録</p>
-              </v-btn>
-            </a>
-          </div>
-        </v-list-item>
-        <div class="conpany-inner-wrap">
-          <v-list-item class="px-2">
-              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
-            <v-list-item-title>{{ users.username }}</v-list-item-title>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-          </v-list-item>
+      <div class="link">
+        <div v-if="Object.keys(users).length">
+          <a href="/signin"></a>
+        </div>
+        <div v-else>
+          <a href="/logout"></a>
         </div>
       </div>
 
@@ -160,22 +159,33 @@ a {
 }
 
 /* edit yajima */
-.singinBtn {
+/* .v-navigation-drawer__content {
+  width: 100% !important;
+} */
+
+.navBar_btm {
+  position: fixed;
+  bottom: 40px;
   width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
+  padding: 10px 20px;
 }
-.singinBtn img {
-  margin-right: 10px;
-}
-.singinBtn p {
-  color: #EA5303 !important;
-  margin: 0 !important;
-}
-.v-btn:not(.v-btn--round).v-size--default[data-v-472a545e] {
-  padding-top: 25px !important;
-  padding-bottom: 25px !important;
+
+
+.link {
+  position: fixed;
+  bottom: 40px;
+  z-index: 150;
   width: 100%;
+  height: 50px;
+}
+.link div {
+  width: 100%;
+  height: 100%;
+}
+.link a {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 </style>
