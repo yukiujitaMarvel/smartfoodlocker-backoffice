@@ -1,27 +1,26 @@
 <template>
   <v-card>
     <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant.sync="mini"
       permanent
       class="navbar"
+      expand-on-hover
     >
-      <v-list-item class="px-2">
+      <a href="/">
+        <v-list-item class="px-2">
           <v-list-item-avatar>
-            <a href="/">
-              <v-icon>mdi-locker-multiple</v-icon>
-            </a>
+            <v-icon>mdi-locker-multiple</v-icon>
           </v-list-item-avatar>
 
           <v-list-item-title>Smart food locker</v-list-item-title>
 
-          <v-btn
-            icon
-            @click.stop="mini = !mini"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-      </v-list-item>
+            <!-- <v-btn
+              icon
+              @click.stop="mini = !mini"
+            >
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn> -->
+        </v-list-item>
+      </a>
 
       <v-divider></v-divider>
 
@@ -40,38 +39,31 @@
           </v-list-item-content>
 
         </v-list-item>
+
+        <v-list-item v-if="Object.keys(users).length"
+        class="navBar_btm singoutBtn"
+        >
+            <v-listitem-icon>
+              <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
+            </v-listitem-icon>
+            <v-list-item-title>ログアウト</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-else
+        class="navBar_btm singinBtn" 
+        >
+            <v-listitem-icon>
+              <img src="@/assets/img/login.png" alt="logOutIcon" width="24" height="24">
+            </v-listitem-icon>
+            <v-list-item-title>ログイン/新規登録</v-list-item-title>
+        </v-list-item>
       </v-list>
 
-      <div class="conpany-wrap">
-        <v-list-item class="px-2" v-if="Object.keys(users).length">
-          <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title>
+      <div class="link">
+        <div v-if="Object.keys(users).length">
           <amplify-sign-out></amplify-sign-out>
-        </v-list-item>
-        <v-list-item class="px-2" v-else>
-          <v-list-item-avatar></v-list-item-avatar>
-          <v-list-item-title></v-list-item-title>
-          <div class="my-2">
-            <a href="/signin">
-              <v-btn
-                color="warning"
-                light
-              >
-                ログインはこちら
-              </v-btn>
-            </a>
-          </div>
-        </v-list-item>
-        <div class="conpany-inner-wrap">
-          <v-list-item class="px-2">
-            <v-list-item-avatar>
-              <v-icon>mdi-office-building</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-title>{{ users.username }}</v-list-item-title>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-          </v-list-item>
+        </div>
+        <div v-else>
+          <a href="/signin"></a>
         </div>
       </div>
 
@@ -98,7 +90,7 @@
         users: {}
       }
     },
-     async created() {
+    async created() {
     await this.getUser()
     },
     methods: {
@@ -161,6 +153,54 @@ a {
 }
 .v-btn:not(.v-btn--round).v-size--default {
   font-weight: bold !important;
+}
+
+/* edit yajima */
+/* .v-navigation-drawer__content {
+  width: 100% !important;
+} */
+
+.navBar_btm {
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  padding: 10px 16px;
+}
+.navBar_btm v-listitem-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.singinBtn {
+  background-color: #fff;
+}
+.singinBtn .v-list-item__title {
+  color: #EA5303;
+}
+.singoutBtn {
+  border-top: #fff 1px solid;
+  border-bottom: #fff 1px solid;
+}
+
+
+.link {
+  position: fixed;
+  bottom: 40px;
+  z-index: 150;
+  width: 100%;
+  height: 60px;
+}
+.link div {
+  width: 100%;
+  height: 100%;
+}
+.link a {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.button {
+  display: none !important;
 }
 
 </style>
