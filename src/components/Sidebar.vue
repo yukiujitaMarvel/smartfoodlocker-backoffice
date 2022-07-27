@@ -43,13 +43,10 @@
         <v-list-item v-if="Object.keys(users).length"
         class="navBar_btm singoutBtn"
         >
-        <!-- <amplify-sign-out></amplify-sign-out> -->
-        <!-- <a href="/signout"> -->
             <v-listitem-icon>
               <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
             </v-listitem-icon>
             <v-list-item-title>ログアウト</v-list-item-title>
-        <!-- </a> -->
         </v-list-item>
         <v-list-item v-else
         class="navBar_btm singinBtn" 
@@ -63,10 +60,10 @@
 
       <div class="link">
         <div v-if="Object.keys(users).length">
-          <a href="/signin"></a>
+          <amplify-sign-out></amplify-sign-out>
         </div>
         <div v-else>
-          <a href="/logout"></a>
+          <a href="/signin"></a>
         </div>
       </div>
 
@@ -167,7 +164,22 @@ a {
   position: fixed;
   bottom: 40px;
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 16px;
+}
+.navBar_btm v-listitem-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.singinBtn {
+  background-color: #fff;
+}
+.singinBtn .v-list-item__title {
+  color: #EA5303;
+}
+.singoutBtn {
+  border-top: #fff 1px solid;
+  border-bottom: #fff 1px solid;
 }
 
 
@@ -176,7 +188,7 @@ a {
   bottom: 40px;
   z-index: 150;
   width: 100%;
-  height: 50px;
+  height: 60px;
 }
 .link div {
   width: 100%;
@@ -186,6 +198,9 @@ a {
   width: 100%;
   height: 100%;
   display: block;
+}
+.button {
+  display: none !important;
 }
 
 </style>
