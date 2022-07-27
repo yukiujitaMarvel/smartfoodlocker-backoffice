@@ -91,14 +91,23 @@
               :items="desserts"
               :search="search"
             >
-            <template v-slot:[`item.actions`]="{ item }">
-              <v-icon
-                nomal
-                @click="edit(item)"
-              >
-                mdi-dots-vertical
-              </v-icon>
-            </template>
+              <template v-slot:item="props">
+                <tr :class="{'notReceave': props.item.status === '未受取'}">
+                  <td>{{props.item.id}}</td>
+                  <td>{{props.item.items.item_name}}</td>
+                  <td>{{props.item.user_id}}</td>
+                  <td>{{props.item.createdAt}}</td>
+                  <td>{{props.item.status}}</td>
+                </tr>
+              </template>
+              <template v-slot:[`item.actions`]="{ item }">
+                <v-icon
+                  nomal
+                  @click="edit(item)"
+                >
+                  mdi-dots-vertical
+                </v-icon>
+              </template>
             </v-data-table>
           </v-card>
         </v-col>
@@ -133,14 +142,17 @@ import '~/assets/css/style.css'
             filterable: false,
             value: 'id',
           },
-          { text: '注文詳細', value: 'order_detail' },
-          { text: '商品数', value: 'item_num' },
+          { text: '商品名', value: 'item_name' },
           { text: '顧客番号', value: 'user_id' },
           { text: '注文日時', value: 'createdAt' },
           { text: 'ステータス', value: 'status' },
-          { text: '操作', value: 'actions' },
+          // { text: '操作', value: 'actions' },
         ],
-        desserts: [],
+        desserts: [{
+          items: {
+            item_name: '',
+          }
+        }],
       }
     },
     computed: {
@@ -153,13 +165,18 @@ import '~/assets/css/style.css'
     },
     methods: {
       async getOrders() {
-        const orders = await API.graphql(graphqlOperation(listOrders));
+        const orders = await API.graphql(
+          graphqlOperation(
+            listOrders
+          )
+        );
         const orderLists = orders.data.listOrders.items;
 
         var status1 = '準備中'
-        var status2 = '受取待ち'
+        var status2 = '投入完了'
         var status3 = '受取完了'
-        var status4 = 'キャンセル'
+        var status4 = '未受取'
+        var status5 = '事前キャンセル'
 
         orderLists.forEach((value, index) => {
           if(value.status == '01') {
@@ -168,8 +185,10 @@ import '~/assets/css/style.css'
             orderLists[index].status = status2
           }else if(value.status == '03') {
             orderLists[index].status = status3
-          }else {
+          }else if(value.status == '04') {
             orderLists[index].status = status4
+          }else {
+            orderLists[index].status = status5
           }
         })
 
@@ -182,7 +201,7 @@ import '~/assets/css/style.css'
   }
 </script>
 
-<style scoped>
+<style >
 .order-title{
   padding: 10px;
 }
@@ -195,6 +214,9 @@ import '~/assets/css/style.css'
 }
 .select-day{
   padding-left: 10px;
+}
+.notReceave {
+  background-color: #D4320880;
 }
 
 </style>
