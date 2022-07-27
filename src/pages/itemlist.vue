@@ -12,156 +12,174 @@
               <v-row>
                 <v-dialog
                   v-model="createdialog"
-                  width="600px"
+                  fullscreen
+                  hide-overlay
+                  transition="dialog-bottom-transition"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <div class="add-btn">
+                    <div class="modal-btn">
                       <v-btn
-                        class="mx-2"
-                        fab
+                        color="orange"
                         light
                         v-bind="attrs"
                         v-on="on"
-                        color="orange"
                       >
-                        <v-icon light>
-                          mdi-plus
-                        </v-icon>
+                        商品を追加
                       </v-btn>
                     </div>
                   </template>
-
-
                   <v-card>
-                    <v-card-title>
-                      <span class="text-h5">商品登録</span>
-                    </v-card-title>
-
-                    <v-card-text>
-                      <div>
-                        <v-text-field
-                          v-model="name"
-                          label="商品名"
-                          :rules="rules"
-                          hide-details="auto"
-                        ></v-text-field>
-                        <div class="file-wrap">
-                          <label for="form-image">ファイルを選択</label>
-                          <input type="file" id="form-image" @change="createImg">
-                          <div class="upload-img" v-if="createData.img != ''">
-                            <img :src="createData.img" alt="">
-                          </div>
-                          <span class="select-image" v-else>選択されていません</span>
-                        </div>
-                        <!--<v-row align="center">
-                          <v-col cols="12">
-                              <v-select
-                                v-model="category"
-                                label="カテゴリ名"
-                                :items="items"
-                                item-text="name"
-                                item-value="value"
-                                required>
-                              ></v-select>
-                          </v-col>
-                        </v-row>-->
-                        <v-textarea
-                          v-model="detail"
-                          label="内容説明"
-                          :rules="rules"
-                          hide-details="auto"
-                        ></v-textarea>
-                        <v-menu
-                          ref="addmenu"
-                          v-model="addmenu"
-                          :close-on-content-click="false"
-                          :return-value.sync="adddate"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="auto"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="adddate"
-                              label="提供日"
-                              prepend-icon="mdi-calendar"
-                              readonly
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                          <v-date-picker
-                            v-model="adddate"
-                            no-title
-                            scrollable
-                          >
-                            <v-spacer></v-spacer>
-                            <v-btn
-                              text
-                              color="primary"
-                              @click="addmenu = false"
-                            >
-                              Cancel
-                            </v-btn>
-                            <v-btn
-                              text
-                              color="primary"
-                              @click="$refs.addmenu.save(adddate)"
-                            >
-                              OK
-                            </v-btn>
-                          </v-date-picker>
-                        </v-menu>
-                        <!-- <v-text-field
-                          v-model="releaseDay"
-                          label="提供日"
-                          :rules="rules"
-                          hide-details="auto"
-                        ></v-text-field> -->
-                        <v-text-field
-                          v-model="price"
-                          label="値段"
-                          :rules="rules"
-                          hide-details="auto"
-                        ></v-text-field>
-                        <v-select
-                          v-model="stock"
-                          :items="num_items"
-                          label="数"
-                        ></v-select>
-                        <v-container fluid>
-                
-                        <!--<v-radio-group
-                          v-model="createrelease"
-                          row
-                        >
-                          <v-radio
-                            label="公開"
-                            v-bind:value='true'
-                          ></v-radio>
-                          <v-radio
-                            label="非公開"
-                            v-bind:value='false'
-                          ></v-radio>
-                        </v-radio-group>-->
-
-                      </v-container>
-                      </div>
-                    </v-card-text>
-                    <v-card-actions>
+                    <v-toolbar
+                      light
+                      color="orange"
+                    >
+                      <v-btn
+                        icon
+                        light
+                        @click="createdialog = false"
+                      >
+                        <v-icon>mdi-close</v-icon>
+                      </v-btn>
+                      <v-toolbar-title>商品を追加</v-toolbar-title>
                       <v-spacer></v-spacer>
-                    <div class="item-add-btn">
+                      <v-toolbar-items>
                         <v-btn
-                          color="secondary"
                           light
+                          text
                           @click="createItem"
                         >
-                          商品を登録する
+                          保存
                         </v-btn>
-                      </div>
-                    </v-card-actions>
-                  </v-card>
+                      </v-toolbar-items>
+                    </v-toolbar>
+                    <v-list
+                      three-line
+                      subheader
+                    >
+                      <v-card>
+                        <!-- <v-card-title>
+                          <span class="text-h5">商品登録</span>
+                        </v-card-title> -->
 
+                        <v-card-text>
+                          <div class="item-add">
+                            <div class="file-wrap">
+                              <div class="upload-img" v-if="createData.img != ''">
+                                <img :src="createData.img" alt="">
+                              </div>
+                              <span class="select-image" v-else>選択されていません</span>
+                              <label for="form-image">ファイルを選択</label>
+                              <input type="file" id="form-image" @change="createImg">
+                            </div>
+                            <div class="content-wrap">
+                              <v-text-field
+                                v-model="name"
+                                label="商品名"
+                                :rules="rules"
+                                hide-details="auto"
+                              ></v-text-field>
+                              <!--<v-row align="center">
+                                <v-col cols="12">
+                                    <v-select
+                                      v-model="category"
+                                      label="カテゴリ名"
+                                      :items="items"
+                                      item-text="name"
+                                      item-value="value"
+                                      required>
+                                    ></v-select>
+                                </v-col>
+                              </v-row>-->
+                              <v-textarea
+                                v-model="detail"
+                                label="内容説明"
+                                :rules="rules"
+                                hide-details="auto"
+                              ></v-textarea>
+                              <v-menu
+                                ref="addmenu"
+                                v-model="addmenu"
+                                :close-on-content-click="false"
+                                :return-value.sync="adddate"
+                                transition="scale-transition"
+                                offset-y
+                                min-width="auto"
+                              >
+                                <template v-slot:activator="{ on, attrs }">
+                                  <v-text-field
+                                    v-model="adddate"
+                                    label="提供日"
+                                    prepend-icon="mdi-calendar"
+                                    readonly
+                                    v-bind="attrs"
+                                    v-on="on"
+                                  ></v-text-field>
+                                </template>
+                                <v-date-picker
+                                  v-model="adddate"
+                                  no-title
+                                  scrollable
+                                >
+                                  <v-spacer></v-spacer>
+                                  <v-btn
+                                    text
+                                    color="primary"
+                                    @click="addmenu = false"
+                                  >
+                                    Cancel
+                                  </v-btn>
+                                  <v-btn
+                                    text
+                                    color="primary"
+                                    @click="$refs.addmenu.save(adddate)"
+                                  >
+                                    OK
+                                  </v-btn>
+                                </v-date-picker>
+                              </v-menu>
+                              <!-- <v-text-field
+                                v-model="releaseDay"
+                                label="提供日"
+                                :rules="rules"
+                                hide-details="auto"
+                              ></v-text-field> -->
+                              <v-text-field
+                                v-model="price"
+                                label="値段"
+                                :rules="rules"
+                                hide-details="auto"
+                              ></v-text-field>
+                              <v-select
+                                v-model="stock"
+                                :items="num_items"
+                                label="数"
+                              ></v-select>
+                              <v-container fluid>
+                      
+                              <!--<v-radio-group
+                                v-model="createrelease"
+                                row
+                              >
+                                <v-radio
+                                  label="公開"
+                                  v-bind:value='true'
+                                ></v-radio>
+                                <v-radio
+                                  label="非公開"
+                                  v-bind:value='false'
+                                ></v-radio>
+                              </v-radio-group>-->
+
+                              </v-container>
+                            </div>
+                          </div>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                        </v-card-actions>
+                      </v-card>
+                    </v-list>
+                  </v-card>
                 </v-dialog>
               </v-row>
             </template>
@@ -661,6 +679,14 @@ export default {
 </script>
 
 <style scoped>
+.item-add{
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+.content-wrap{
+  width: 60%;
+}
 .order-title{
   padding: 10px;
 }
@@ -668,7 +694,7 @@ export default {
   font-size: 20px;
 }
 .file-wrap{
-  margin: 30px 0 30px 0;
+  margin: 20px 0 20px 0;
 }
 label {
   padding: 5px 20px;
@@ -702,16 +728,27 @@ button {
   font-weight: bold;
 }
 .upload-img{
-  width: 100px;
-  height: 100px;
-  margin: 10px 0 0 10px;
+  width: 300px;
+  height: 300px;
+  margin: 10px 10px 10px 0;
 }
 .upload-img img{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
 .add-btn{
   margin: 20px;
+}
+.modal-btn{
+  margin: 20px;
+}
+.theme--light.v-btn{
+  color: white;
+}
+.v-toolbar__title{
+  color: white;
+  font-weight: bold;
 }
 </style>
