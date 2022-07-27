@@ -46,7 +46,7 @@
             <v-listitem-icon>
               <img src="@/assets/img/logout.png" alt="logOutIcon" width="24" height="24">
             </v-listitem-icon>
-            <v-list-item-title>ログアウト</v-list-item-title>
+            <v-list-item-title>{{ users.username }}</v-list-item-title>
         </v-list-item>
         <v-list-item v-else
         class="navBar_btm singinBtn" 
@@ -60,7 +60,8 @@
 
       <div class="link">
         <div v-if="Object.keys(users).length">
-          <amplify-sign-out></amplify-sign-out>
+          <a href="#" @click="logout"></a>
+          <!-- <amplify-sign-out></amplify-sign-out> -->
         </div>
         <div v-else>
           <a href="/signin"></a>
@@ -68,15 +69,52 @@
       </div>
 
     </v-navigation-drawer>
+
+    <v-row justify="center">
+      <v-dialog
+        v-model="logoutdialog"
+        max-width="290"
+      >
+        <v-card>
+          <h5>本当にログアウトしてもよろしいですか？</h5>
+          <v-card-actions>
+            <div class="cansel-btn-wrap">
+              <!-- <button
+                color="green darken-1"
+                text
+                class="back-btn"
+                @click="logoutdialog = false"
+              >
+                いいえ
+              </button> -->
+              <amplify-sign-out></amplify-sign-out>
+              <!-- <button
+                color="green darken-1"
+                text
+                class="cancel-btn"
+              >
+                はい
+              </button> -->
+            </div>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+
+
+
   </v-card>
 </template>
 
 <script>
   import Auth from "@aws-amplify/auth";
+  import { Hub } from 'aws-amplify'
+
   export default {
     data () {
       return {
         drawer: true,
+        logoutdialog: false,
         items: [
           { title: '注文状況一覧', icon: 'mdi-cart', link: '/orderlist' },
           { title: '商品一覧', icon: 'mdi-food-outline', link: '/itemlist' },
@@ -90,8 +128,13 @@
         users: {}
       }
     },
+    
+    destroyed() {
+      Hub.remove('auth', this.listener)
+    },
     async created() {
     await this.getUser()
+    Hub.listen('auth', this.listener)
     },
     methods: {
       async getUser() {
@@ -105,6 +148,14 @@
             })
         } catch(e){
         } 
+      },
+      logout(){
+        this.logoutdialog = true
+      },
+      listener(data){
+        if(data.payload.event == 'signOut') {
+          this.$router.push('/')
+        }
       },
     },
   }
