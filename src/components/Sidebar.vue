@@ -254,4 +254,50 @@ a {
   display: none !important;
 }
 
+.v-card__actions{
+  display: block;
+  text-align: center;
+}
+.cansel-btn-wrap{
+  padding: 10px;
+}
+.back-btn{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  color: orange;
+  padding: 10px 20px 10px 20px;
+  margin-right: 30px;
+}
+.back-btn:hover{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+}
+.cancel-btn{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  width: 85px;
+  padding: 10px;
+}
+.cancel-btn:hover{
+  font-size: 12px;
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: white;
+  color: orange;
+  padding: 10px;
+}
+h5{
+  padding: 30px;
+}
+
 </style>

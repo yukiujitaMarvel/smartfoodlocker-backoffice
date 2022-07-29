@@ -28,7 +28,7 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="dateRangeText"
-                        label="2022-10-01~2022-10-31 現在"
+                        label="日付範囲指定"
                         prepend-icon="mdi-calendar"
                         readonly
                         v-bind="attrs"
@@ -52,7 +52,7 @@
                       <v-btn
                         text
                         color="primary"
-                        @click="$refs.menu.save(date)"
+                        @click="selectDay"
                       >
                         OK
                       </v-btn>
@@ -133,7 +133,8 @@ import '~/assets/css/style.css'
     },
     data () {
       return {
-        dates: ['2022-10-01', '2022-10-31'],
+        dates: [],
+        orders: [],
         search: '',
         headers: [
           {
@@ -172,6 +173,8 @@ import '~/assets/css/style.css'
         );
         const orderLists = orders.data.listOrders.items;
 
+        this.orders = orderLists;
+
         var status1 = '準備中'
         var status2 = '投入完了'
         var status3 = '受取完了'
@@ -193,10 +196,42 @@ import '~/assets/css/style.css'
         })
 
         this.desserts = orderLists
+
+        console.log(this.desserts)
       },
       edit(item) {
         console.log(item.name)
-      }
+      },
+      async selectDay(){
+        this.menu = false
+
+        const selectDay = this.dates;
+        const data = this.orders;
+
+        console.log(data);
+
+        data.forEach((value) => {
+          let d_day = new Date(value.createdAt);
+          let d_y = d_day.getFullYear();
+          let d_m = ('0' + (d_day.getMonth() + 1)).slice(-2);
+          let d_d = ('0' + d_day.getDate()).slice(-2);
+
+          const filterData = (d_y + '-' + d_m + '-' + d_d)
+          value.createdAt = filterData;
+        })
+
+        this.desserts = [];
+
+        data.filter((value) => {
+          if(value.createdAt >= selectDay[0] && value.createdAt <= selectDay[1]) {
+            this.desserts.push(value);
+          }else if(value.createdAt == selectDay){
+            this.desserts.push(value);
+          }else {
+            console.log('条件に一致しません。')
+          }
+        })
+      },
     }
   }
 </script>
