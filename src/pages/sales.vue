@@ -41,7 +41,7 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="dateRangeText"
-                        label="2022-10-01~2022-10-31 現在"
+                        label="日付範囲指定"
                         prepend-icon="mdi-calendar"
                         readonly
                         v-bind="attrs"
@@ -65,7 +65,7 @@
                       <v-btn
                         text
                         color="primary"
-                        @click="$refs.menu.save(date)"
+                        @click="selectDay"
                       >
                         OK
                       </v-btn>
@@ -99,20 +99,12 @@
                 </v-btn>
               </div>
             </v-card-title>
-            <v-data-table
-              :headers="headers"
-              :items="desserts"
-              :search="search"
-            >
-            <template v-slot:[`item.actions`]="{ item }">
-              <v-icon
-                nomal
-                @click="edit(item)"
+              <v-data-table
+                :headers="headers"
+                :items="desserts"
+                :search="search"
               >
-                mdi-dots-vertical
-              </v-icon>
-            </template>
-            </v-data-table>
+              </v-data-table>
           </v-card>
         </v-col>
       </v-row>
@@ -139,7 +131,8 @@ import '~/assets/css/style.css'
       return {
         date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         menu: false,
-        dates: ['2022-10-01', '2022-10-31'],
+        dates: [],
+        orders:[],
         search: '',
         today_price: '',
         month_price: '',
@@ -173,6 +166,8 @@ import '~/assets/css/style.css'
       async getOrders() {
         const orders = await API.graphql(graphqlOperation(listOrders, {filter: {status: {eq: '03'}}}));
         this.desserts = orders.data.listOrders.items;
+
+        this.orders = this.desserts;
 
         let td = new Date();
         let y = td.getFullYear();
@@ -208,7 +203,35 @@ import '~/assets/css/style.css'
       },
       edit(item) {
         console.log(item.name)
-      }
+      },
+      async selectDay(){
+        this.menu = false
+
+        const selectDay = this.dates;
+        const data = this.orders;
+
+        data.forEach((value) => {
+          let d_day = new Date(value.createdAt);
+          let d_y = d_day.getFullYear();
+          let d_m = ('0' + (d_day.getMonth() + 1)).slice(-2);
+          let d_d = ('0' + d_day.getDate()).slice(-2);
+
+          const filterData = (d_y + '-' + d_m + '-' + d_d)
+          value.createdAt = filterData;
+        })
+
+        this.desserts = [];
+
+        data.filter((value) => {
+          if(value.createdAt >= selectDay[0] && value.createdAt <= selectDay[1]) {
+            this.desserts.push(value);
+          }else if(value.createdAt == selectDay){
+            this.desserts.push(value);
+          }else {
+            console.log('条件に一致しません。')
+          }
+        })
+      },
     }
   }
 </script>
