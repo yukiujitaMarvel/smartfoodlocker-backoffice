@@ -148,11 +148,16 @@ export const getCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -186,11 +191,16 @@ export const listCarts = /* GraphQL */ `
         items {
           id
           item_img
+          category_id
           item_name
           item_price
+          release
+          deleteAt
           item_stock
-          release_day
-          item_detail
+          create_user
+          update_user
+          delete_user
+          logical_deletion_flg
           createdAt
           updatedAt
         }
@@ -299,11 +309,16 @@ export const getOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -339,11 +354,16 @@ export const listOrderDetails = /* GraphQL */ `
         items {
           id
           item_img
+          category_id
           item_name
           item_price
+          release
+          deleteAt
           item_stock
-          release_day
-          item_detail
+          create_user
+          update_user
+          delete_user
+          logical_deletion_flg
           createdAt
           updatedAt
         }
@@ -369,11 +389,16 @@ export const getMenuOrders = /* GraphQL */ `
           items {
             id
             item_img
+            category_id
             item_name
             item_price
+            release
+            deleteAt
             item_stock
-            release_day
-            item_detail
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
             createdAt
             updatedAt
           }
@@ -429,11 +454,16 @@ export const listMenuOrders = /* GraphQL */ `
             items {
               id
               item_img
+              category_id
               item_name
               item_price
+              release
+              deleteAt
               item_stock
-              release_day
-              item_detail
+              create_user
+              update_user
+              delete_user
+              logical_deletion_flg
               createdAt
               updatedAt
             }
