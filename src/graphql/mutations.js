@@ -1,6 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createMenus = /* GraphQL */ `
+  mutation CreateMenus(
+    $input: CreateMenusInput!
+    $condition: ModelMenusConditionInput
+  ) {
+    createMenus(input: $input, condition: $condition) {
+      id
+      item_img
+      item_name
+      item_price
+      item_stock
+      release_day
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMenus = /* GraphQL */ `
+  mutation UpdateMenus(
+    $input: UpdateMenusInput!
+    $condition: ModelMenusConditionInput
+  ) {
+    updateMenus(input: $input, condition: $condition) {
+      id
+      item_img
+      item_name
+      item_price
+      item_stock
+      release_day
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMenus = /* GraphQL */ `
+  mutation DeleteMenus(
+    $input: DeleteMenusInput!
+    $condition: ModelMenusConditionInput
+  ) {
+    deleteMenus(input: $input, condition: $condition) {
+      id
+      item_img
+      item_name
+      item_price
+      item_stock
+      release_day
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createItems = /* GraphQL */ `
   mutation CreateItems(
     $input: CreateItemsInput!
@@ -9,11 +63,16 @@ export const createItems = /* GraphQL */ `
     createItems(input: $input, condition: $condition) {
       id
       item_img
+      category_id
       item_name
       item_price
+      release
+      deleteAt
       item_stock
-      release_day
-      item_detail
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
       createdAt
       updatedAt
     }
@@ -27,11 +86,16 @@ export const updateItems = /* GraphQL */ `
     updateItems(input: $input, condition: $condition) {
       id
       item_img
+      category_id
       item_name
       item_price
+      release
+      deleteAt
       item_stock
-      release_day
-      item_detail
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
       createdAt
       updatedAt
     }
@@ -45,11 +109,16 @@ export const deleteItems = /* GraphQL */ `
     deleteItems(input: $input, condition: $condition) {
       id
       item_img
+      category_id
       item_name
       item_price
+      release
+      deleteAt
       item_stock
-      release_day
-      item_detail
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
       createdAt
       updatedAt
     }
@@ -111,23 +180,20 @@ export const createCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
       user_id
-      users {
-        user_id
-        user_name
-        user_email
-        user_number
-        createdAt
-        updatedAt
-      }
       rice_option
       soup_option
       item_num
@@ -147,23 +213,20 @@ export const updateCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
       user_id
-      users {
-        user_id
-        user_name
-        user_email
-        user_number
-        createdAt
-        updatedAt
-      }
       rice_option
       soup_option
       item_num
@@ -183,23 +246,20 @@ export const deleteCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
       user_id
-      users {
-        user_id
-        user_name
-        user_email
-        user_number
-        createdAt
-        updatedAt
-      }
       rice_option
       soup_option
       item_num
@@ -215,24 +275,41 @@ export const createOrders = /* GraphQL */ `
   ) {
     createOrders(input: $input, condition: $condition) {
       id
+      order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
-        createdAt
-        updatedAt
-      }
-      item_id
-      items {
-        id
-        item_img
-        item_name
-        item_price
-        item_stock
-        release_day
-        item_detail
         createdAt
         updatedAt
       }
@@ -253,24 +330,41 @@ export const updateOrders = /* GraphQL */ `
   ) {
     updateOrders(input: $input, condition: $condition) {
       id
+      order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
-        createdAt
-        updatedAt
-      }
-      item_id
-      items {
-        id
-        item_img
-        item_name
-        item_price
-        item_stock
-        release_day
-        item_detail
         createdAt
         updatedAt
       }
@@ -291,24 +385,41 @@ export const deleteOrders = /* GraphQL */ `
   ) {
     deleteOrders(input: $input, condition: $condition) {
       id
+      order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            category_id
+            item_name
+            item_price
+            release
+            deleteAt
+            item_stock
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
-        createdAt
-        updatedAt
-      }
-      item_id
-      items {
-        id
-        item_img
-        item_name
-        item_price
-        item_stock
-        release_day
-        item_detail
         createdAt
         updatedAt
       }
@@ -334,11 +445,16 @@ export const createOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -362,11 +478,16 @@ export const updateOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -390,17 +511,151 @@ export const deleteOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
       rice_option
       soup_option
       item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createMenuOrders = /* GraphQL */ `
+  mutation CreateMenuOrders(
+    $input: CreateMenuOrdersInput!
+    $condition: ModelMenuOrdersConditionInput
+  ) {
+    createMenuOrders(input: $input, condition: $condition) {
+      id
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMenuOrders = /* GraphQL */ `
+  mutation UpdateMenuOrders(
+    $input: UpdateMenuOrdersInput!
+    $condition: ModelMenuOrdersConditionInput
+  ) {
+    updateMenuOrders(input: $input, condition: $condition) {
+      id
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMenuOrders = /* GraphQL */ `
+  mutation DeleteMenuOrders(
+    $input: DeleteMenuOrdersInput!
+    $condition: ModelMenuOrdersConditionInput
+  ) {
+    deleteMenuOrders(input: $input, condition: $condition) {
+      id
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
       createdAt
       updatedAt
     }
@@ -512,9 +767,9 @@ export const createSchedules = /* GraphQL */ `
   ) {
     createSchedules(input: $input, condition: $condition) {
       id
-      merchant_id
-      holiday_flg
       date
+      holiday_flg
+      individual_flg
       start_time
       finish_time
       createdAt
@@ -529,9 +784,9 @@ export const updateSchedules = /* GraphQL */ `
   ) {
     updateSchedules(input: $input, condition: $condition) {
       id
-      merchant_id
-      holiday_flg
       date
+      holiday_flg
+      individual_flg
       start_time
       finish_time
       createdAt
@@ -546,9 +801,57 @@ export const deleteSchedules = /* GraphQL */ `
   ) {
     deleteSchedules(input: $input, condition: $condition) {
       id
-      merchant_id
-      holiday_flg
       date
+      holiday_flg
+      individual_flg
+      start_time
+      finish_time
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createWeeks = /* GraphQL */ `
+  mutation CreateWeeks(
+    $input: CreateWeeksInput!
+    $condition: ModelWeeksConditionInput
+  ) {
+    createWeeks(input: $input, condition: $condition) {
+      id
+      day_of_week
+      holiday_flg
+      start_time
+      finish_time
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWeeks = /* GraphQL */ `
+  mutation UpdateWeeks(
+    $input: UpdateWeeksInput!
+    $condition: ModelWeeksConditionInput
+  ) {
+    updateWeeks(input: $input, condition: $condition) {
+      id
+      day_of_week
+      holiday_flg
+      start_time
+      finish_time
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWeeks = /* GraphQL */ `
+  mutation DeleteWeeks(
+    $input: DeleteWeeksInput!
+    $condition: ModelWeeksConditionInput
+  ) {
+    deleteWeeks(input: $input, condition: $condition) {
+      id
+      day_of_week
+      holiday_flg
       start_time
       finish_time
       createdAt
