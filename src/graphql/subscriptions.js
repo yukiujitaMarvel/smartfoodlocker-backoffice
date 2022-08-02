@@ -150,11 +150,16 @@ export const onCreateCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -175,11 +180,16 @@ export const onUpdateCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -200,11 +210,16 @@ export const onDeleteCarts = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -331,11 +346,16 @@ export const onCreateOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -356,11 +376,16 @@ export const onUpdateOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -381,11 +406,16 @@ export const onDeleteOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -409,11 +439,16 @@ export const onCreateMenuOrders = /* GraphQL */ `
           items {
             id
             item_img
+            category_id
             item_name
             item_price
+            release
+            deleteAt
             item_stock
-            release_day
-            item_detail
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
             createdAt
             updatedAt
           }
@@ -456,11 +491,16 @@ export const onUpdateMenuOrders = /* GraphQL */ `
           items {
             id
             item_img
+            category_id
             item_name
             item_price
+            release
+            deleteAt
             item_stock
-            release_day
-            item_detail
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
             createdAt
             updatedAt
           }
@@ -503,11 +543,16 @@ export const onDeleteMenuOrders = /* GraphQL */ `
           items {
             id
             item_img
+            category_id
             item_name
             item_price
+            release
+            deleteAt
             item_stock
-            release_day
-            item_detail
+            create_user
+            update_user
+            delete_user
+            logical_deletion_flg
             createdAt
             updatedAt
           }
