@@ -6,11 +6,16 @@ export const getMenus = /* GraphQL */ `
     getMenus(id: $id) {
       id
       item_img
+      category_id
       item_name
       item_price
+      release
+      deleteAt
       item_stock
-      release_day
-      item_detail
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
       createdAt
       updatedAt
     }
@@ -34,11 +39,16 @@ export const listMenus = /* GraphQL */ `
       items {
         id
         item_img
+        category_id
         item_name
         item_price
+        release
+        deleteAt
         item_stock
-        release_day
-        item_detail
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -51,16 +61,11 @@ export const getItems = /* GraphQL */ `
     getItems(id: $id) {
       id
       item_img
-      category_id
       item_name
       item_price
-      release
-      deleteAt
       item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
+      release_day
+      item_detail
       createdAt
       updatedAt
     }
@@ -84,16 +89,11 @@ export const listItems = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -148,16 +148,11 @@ export const getCarts = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -191,16 +186,11 @@ export const listCarts = /* GraphQL */ `
         items {
           id
           item_img
-          category_id
           item_name
           item_price
-          release
-          deleteAt
           item_stock
-          create_user
-          update_user
-          delete_user
-          logical_deletion_flg
+          release_day
+          item_detail
           createdAt
           updatedAt
         }
@@ -219,41 +209,24 @@ export const getOrders = /* GraphQL */ `
   query GetOrders($id: ID!) {
     getOrders(id: $id) {
       id
-      order_detail {
-        items {
-          id
-          cart_id
-          item_id
-          items {
-            id
-            item_img
-            category_id
-            item_name
-            item_price
-            release
-            deleteAt
-            item_stock
-            create_user
-            update_user
-            delete_user
-            logical_deletion_flg
-            createdAt
-            updatedAt
-          }
-          rice_option
-          soup_option
-          item_num
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        item_name
+        item_price
+        item_stock
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -284,41 +257,24 @@ export const listOrders = /* GraphQL */ `
     ) {
       items {
         id
-        order_detail {
-          items {
-            id
-            cart_id
-            item_id
-            items {
-              id
-              item_img
-              category_id
-              item_name
-              item_price
-              release
-              deleteAt
-              item_stock
-              create_user
-              update_user
-              delete_user
-              logical_deletion_flg
-              createdAt
-              updatedAt
-            }
-            rice_option
-            soup_option
-            item_num
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
         user_id
         users {
           user_id
           user_name
           user_email
           user_number
+          createdAt
+          updatedAt
+        }
+        item_id
+        items {
+          id
+          item_img
+          item_name
+          item_price
+          item_stock
+          release_day
+          item_detail
           createdAt
           updatedAt
         }
@@ -343,16 +299,11 @@ export const getOrderDetail = /* GraphQL */ `
       items {
         id
         item_img
-        category_id
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        release_day
+        item_detail
         createdAt
         updatedAt
       }
@@ -388,16 +339,11 @@ export const listOrderDetails = /* GraphQL */ `
         items {
           id
           item_img
-          category_id
           item_name
           item_price
-          release
-          deleteAt
           item_stock
-          create_user
-          update_user
-          delete_user
-          logical_deletion_flg
+          release_day
+          item_detail
           createdAt
           updatedAt
         }
@@ -415,29 +361,36 @@ export const getMenuOrders = /* GraphQL */ `
   query GetMenuOrders($id: ID!) {
     getMenuOrders(id: $id) {
       id
+      order_detail {
+        items {
+          id
+          cart_id
+          item_id
+          items {
+            id
+            item_img
+            item_name
+            item_price
+            item_stock
+            release_day
+            item_detail
+            createdAt
+            updatedAt
+          }
+          rice_option
+          soup_option
+          item_num
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       user_id
       users {
         user_id
         user_name
         user_email
         user_number
-        createdAt
-        updatedAt
-      }
-      item_id
-      items {
-        id
-        item_img
-        category_id
-        item_name
-        item_price
-        release
-        deleteAt
-        item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
         createdAt
         updatedAt
       }
@@ -468,29 +421,36 @@ export const listMenuOrders = /* GraphQL */ `
     ) {
       items {
         id
+        order_detail {
+          items {
+            id
+            cart_id
+            item_id
+            items {
+              id
+              item_img
+              item_name
+              item_price
+              item_stock
+              release_day
+              item_detail
+              createdAt
+              updatedAt
+            }
+            rice_option
+            soup_option
+            item_num
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         user_id
         users {
           user_id
           user_name
           user_email
           user_number
-          createdAt
-          updatedAt
-        }
-        item_id
-        items {
-          id
-          item_img
-          category_id
-          item_name
-          item_price
-          release
-          deleteAt
-          item_stock
-          create_user
-          update_user
-          delete_user
-          logical_deletion_flg
           createdAt
           updatedAt
         }
