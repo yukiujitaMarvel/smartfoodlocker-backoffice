@@ -407,8 +407,8 @@
 
 <script>
 import { API, graphqlOperation, Storage} from 'aws-amplify'
-import { listItems } from '../graphql/queries'
-import { createItems, deleteItems, updateItems } from '../graphql/mutations'
+import { listOldItems } from '../graphql/queries'
+import { createOldItems, deleteOldItems, updateOldItems } from '../graphql/mutations'
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 import { privateDecrypt } from 'crypto'
@@ -521,7 +521,7 @@ export default {
         // release_day: this.releaseDay,
         item_detail: this.detail,
       };
-      await API.graphql(graphqlOperation(createItems, {input: addItem}))
+      await API.graphql(graphqlOperation(createOldItems, {input: addItem}))
       .then(response => {
           console.log(response);
           
@@ -541,8 +541,8 @@ export default {
 
     // 商品データ取得
     async getItems() {
-      const items = await API.graphql(graphqlOperation(listItems));
-      const itemLists = items.data.listItems.items;
+      const items = await API.graphql(graphqlOperation(listOldItems));
+      const itemLists = items.data.listOldItems.items;
 
       /*var category_name1 = '弁当'
       var category_name2 = 'サンドイッチ'
@@ -647,7 +647,7 @@ export default {
         // release_day: this.edititems.releaseDay,
         item_detail: this.edititems.detail,        
       };
-      await API.graphql(graphqlOperation(updateItems, {input: updateItem}))
+      await API.graphql(graphqlOperation(updateOldItems, {input: updateItem}))
       .then(response => {
           console.log(response);
           
@@ -664,7 +664,7 @@ export default {
       const deleteItemsInput = {
         id: item.id
       };
-      const deleteItem = await API.graphql(graphqlOperation(deleteItems,{input: deleteItemsInput}));
+      const deleteItem = await API.graphql(graphqlOperation(deleteOldItems,{input: deleteItemsInput}));
       console.log(deleteItem);
 
       if(item.item_img.indexOf(this.$SITE_DOMAIN) === 0){

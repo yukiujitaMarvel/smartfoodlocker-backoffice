@@ -1,9 +1,119 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getItems = /* GraphQL */ `
+  query GetItems($id: ID!) {
+    getItems(id: $id) {
+      id
+      category_id
+      merchant_id
+      item_img
+      item_name
+      item_price
+      item_stock
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listItems = /* GraphQL */ `
+  query ListItems(
+    $id: ID
+    $filter: ModelItemsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listItems(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getMenus = /* GraphQL */ `
-  query GetMenus($id: ID!) {
-    getMenus(id: $id) {
+  query GetMenus($id: ID!, $release_day: String!) {
+    getMenus(id: $id, release_day: $release_day) {
+      id
+      release_day
+      merchant_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listMenus = /* GraphQL */ `
+  query ListMenus(
+    $id: ID
+    $release_day: ModelStringKeyConditionInput
+    $filter: ModelMenusFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listMenus(
+      id: $id
+      release_day: $release_day
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        release_day
+        merchant_id
+        items {
+          id
+          category_id
+          merchant_id
+          item_img
+          item_name
+          item_price
+          item_stock
+          item_detail
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOldMenus = /* GraphQL */ `
+  query GetOldMenus($id: ID!) {
+    getOldMenus(id: $id) {
       id
       item_img
       category_id
@@ -21,15 +131,15 @@ export const getMenus = /* GraphQL */ `
     }
   }
 `;
-export const listMenus = /* GraphQL */ `
-  query ListMenus(
+export const listOldMenus = /* GraphQL */ `
+  query ListOldMenus(
     $id: ID
-    $filter: ModelMenusFilterInput
+    $filter: ModelOldMenusFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listMenus(
+    listOldMenus(
       id: $id
       filter: $filter
       limit: $limit
@@ -56,9 +166,9 @@ export const listMenus = /* GraphQL */ `
     }
   }
 `;
-export const getItems = /* GraphQL */ `
-  query GetItems($id: ID!) {
-    getItems(id: $id) {
+export const getOldItems = /* GraphQL */ `
+  query GetOldItems($id: ID!) {
+    getOldItems(id: $id) {
       id
       item_img
       item_name
@@ -71,15 +181,15 @@ export const getItems = /* GraphQL */ `
     }
   }
 `;
-export const listItems = /* GraphQL */ `
-  query ListItems(
+export const listOldItems = /* GraphQL */ `
+  query ListOldItems(
     $id: ID
-    $filter: ModelItemsFilterInput
+    $filter: ModelOldItemsFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listItems(
+    listOldItems(
       id: $id
       filter: $filter
       limit: $limit
@@ -147,6 +257,73 @@ export const getCarts = /* GraphQL */ `
       item_id
       items {
         id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      user_id
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCarts = /* GraphQL */ `
+  query ListCarts(
+    $id: ID
+    $filter: ModelCartsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCarts(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        item_id
+        items {
+          id
+          category_id
+          merchant_id
+          item_img
+          item_name
+          item_price
+          item_stock
+          item_detail
+          createdAt
+          updatedAt
+        }
+        user_id
+        rice_option
+        soup_option
+        item_num
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOldCarts = /* GraphQL */ `
+  query GetOldCarts($id: ID!) {
+    getOldCarts(id: $id) {
+      id
+      item_id
+      items {
+        id
         item_img
         category_id
         item_name
@@ -170,15 +347,15 @@ export const getCarts = /* GraphQL */ `
     }
   }
 `;
-export const listCarts = /* GraphQL */ `
-  query ListCarts(
+export const listOldCarts = /* GraphQL */ `
+  query ListOldCarts(
     $id: ID
-    $filter: ModelCartsFilterInput
+    $filter: ModelOldCartsFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listCarts(
+    listOldCarts(
       id: $id
       filter: $filter
       limit: $limit
@@ -219,6 +396,87 @@ export const getOrders = /* GraphQL */ `
   query GetOrders($id: ID!) {
     getOrders(id: $id) {
       id
+      merchant_id
+      user_id
+      item_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      order_category
+      rice_option
+      soup_option
+      item_num
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $id: ID
+    $filter: ModelOrdersFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listOrders(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        merchant_id
+        user_id
+        item_id
+        items {
+          id
+          category_id
+          merchant_id
+          item_img
+          item_name
+          item_price
+          item_stock
+          item_detail
+          createdAt
+          updatedAt
+        }
+        order_category
+        rice_option
+        soup_option
+        item_num
+        total_price
+        pickup_place
+        pickup_time
+        status
+        lock_flg
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOldOrders = /* GraphQL */ `
+  query GetOldOrders($id: ID!) {
+    getOldOrders(id: $id) {
+      id
       user_id
       users {
         user_id
@@ -250,15 +508,15 @@ export const getOrders = /* GraphQL */ `
     }
   }
 `;
-export const listOrders = /* GraphQL */ `
-  query ListOrders(
+export const listOldOrders = /* GraphQL */ `
+  query ListOldOrders(
     $id: ID
-    $filter: ModelOrdersFilterInput
+    $filter: ModelOldOrdersFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listOrders(
+    listOldOrders(
       id: $id
       filter: $filter
       limit: $limit
