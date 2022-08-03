@@ -1,75 +1,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateMenus = /* GraphQL */ `
-  subscription OnCreateMenus {
-    onCreateMenus {
-      id
-      item_img
-      category_id
-      item_name
-      item_price
-      release
-      deleteAt
-      item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateMenus = /* GraphQL */ `
-  subscription OnUpdateMenus {
-    onUpdateMenus {
-      id
-      item_img
-      category_id
-      item_name
-      item_price
-      release
-      deleteAt
-      item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteMenus = /* GraphQL */ `
-  subscription OnDeleteMenus {
-    onDeleteMenus {
-      id
-      item_img
-      category_id
-      item_name
-      item_price
-      release
-      deleteAt
-      item_stock
-      create_user
-      update_user
-      delete_user
-      logical_deletion_flg
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateItems = /* GraphQL */ `
   subscription OnCreateItems {
     onCreateItems {
       id
+      category_id
+      merchant_id
       item_img
       item_name
       item_price
       item_stock
-      release_day
       item_detail
       createdAt
       updatedAt
@@ -80,6 +21,167 @@ export const onUpdateItems = /* GraphQL */ `
   subscription OnUpdateItems {
     onUpdateItems {
       id
+      category_id
+      merchant_id
+      item_img
+      item_name
+      item_price
+      item_stock
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteItems = /* GraphQL */ `
+  subscription OnDeleteItems {
+    onDeleteItems {
+      id
+      category_id
+      merchant_id
+      item_img
+      item_name
+      item_price
+      item_stock
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateMenus = /* GraphQL */ `
+  subscription OnCreateMenus {
+    onCreateMenus {
+      id
+      release_day
+      merchant_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMenus = /* GraphQL */ `
+  subscription OnUpdateMenus {
+    onUpdateMenus {
+      id
+      release_day
+      merchant_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteMenus = /* GraphQL */ `
+  subscription OnDeleteMenus {
+    onDeleteMenus {
+      id
+      release_day
+      merchant_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOldMenus = /* GraphQL */ `
+  subscription OnCreateOldMenus {
+    onCreateOldMenus {
+      id
+      item_img
+      category_id
+      item_name
+      item_price
+      release
+      deleteAt
+      item_stock
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOldMenus = /* GraphQL */ `
+  subscription OnUpdateOldMenus {
+    onUpdateOldMenus {
+      id
+      item_img
+      category_id
+      item_name
+      item_price
+      release
+      deleteAt
+      item_stock
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOldMenus = /* GraphQL */ `
+  subscription OnDeleteOldMenus {
+    onDeleteOldMenus {
+      id
+      item_img
+      category_id
+      item_name
+      item_price
+      release
+      deleteAt
+      item_stock
+      create_user
+      update_user
+      delete_user
+      logical_deletion_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOldItems = /* GraphQL */ `
+  subscription OnCreateOldItems {
+    onCreateOldItems {
+      id
       item_img
       item_name
       item_price
@@ -91,9 +193,24 @@ export const onUpdateItems = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteItems = /* GraphQL */ `
-  subscription OnDeleteItems {
-    onDeleteItems {
+export const onUpdateOldItems = /* GraphQL */ `
+  subscription OnUpdateOldItems {
+    onUpdateOldItems {
+      id
+      item_img
+      item_name
+      item_price
+      item_stock
+      release_day
+      item_detail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOldItems = /* GraphQL */ `
+  subscription OnDeleteOldItems {
+    onDeleteOldItems {
       id
       item_img
       item_name
@@ -149,17 +266,13 @@ export const onCreateCarts = /* GraphQL */ `
       item_id
       items {
         id
-        item_img
         category_id
+        merchant_id
+        item_img
         item_name
         item_price
-        release
-        deleteAt
         item_stock
-        create_user
-        update_user
-        delete_user
-        logical_deletion_flg
+        item_detail
         createdAt
         updatedAt
       }
@@ -175,6 +288,58 @@ export const onCreateCarts = /* GraphQL */ `
 export const onUpdateCarts = /* GraphQL */ `
   subscription OnUpdateCarts {
     onUpdateCarts {
+      id
+      item_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      user_id
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCarts = /* GraphQL */ `
+  subscription OnDeleteCarts {
+    onDeleteCarts {
+      id
+      item_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      user_id
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOldCarts = /* GraphQL */ `
+  subscription OnCreateOldCarts {
+    onCreateOldCarts {
       id
       item_id
       items {
@@ -202,9 +367,39 @@ export const onUpdateCarts = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteCarts = /* GraphQL */ `
-  subscription OnDeleteCarts {
-    onDeleteCarts {
+export const onUpdateOldCarts = /* GraphQL */ `
+  subscription OnUpdateOldCarts {
+    onUpdateOldCarts {
+      id
+      item_id
+      items {
+        id
+        item_img
+        category_id
+        item_name
+        item_price
+        release
+        deleteAt
+        item_stock
+        create_user
+        update_user
+        delete_user
+        logical_deletion_flg
+        createdAt
+        updatedAt
+      }
+      user_id
+      rice_option
+      soup_option
+      item_num
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOldCarts = /* GraphQL */ `
+  subscription OnDeleteOldCarts {
+    onDeleteOldCarts {
       id
       item_id
       items {
@@ -236,27 +431,25 @@ export const onCreateOrders = /* GraphQL */ `
   subscription OnCreateOrders {
     onCreateOrders {
       id
+      merchant_id
       user_id
-      users {
-        user_id
-        user_name
-        user_email
-        user_number
-        createdAt
-        updatedAt
-      }
       item_id
       items {
         id
+        category_id
+        merchant_id
         item_img
         item_name
         item_price
         item_stock
-        release_day
         item_detail
         createdAt
         updatedAt
       }
+      order_category
+      rice_option
+      soup_option
+      item_num
       total_price
       pickup_place
       pickup_time
@@ -270,6 +463,72 @@ export const onCreateOrders = /* GraphQL */ `
 export const onUpdateOrders = /* GraphQL */ `
   subscription OnUpdateOrders {
     onUpdateOrders {
+      id
+      merchant_id
+      user_id
+      item_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      order_category
+      rice_option
+      soup_option
+      item_num
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrders = /* GraphQL */ `
+  subscription OnDeleteOrders {
+    onDeleteOrders {
+      id
+      merchant_id
+      user_id
+      item_id
+      items {
+        id
+        category_id
+        merchant_id
+        item_img
+        item_name
+        item_price
+        item_stock
+        item_detail
+        createdAt
+        updatedAt
+      }
+      order_category
+      rice_option
+      soup_option
+      item_num
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOldOrders = /* GraphQL */ `
+  subscription OnCreateOldOrders {
+    onCreateOldOrders {
       id
       user_id
       users {
@@ -302,9 +561,44 @@ export const onUpdateOrders = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteOrders = /* GraphQL */ `
-  subscription OnDeleteOrders {
-    onDeleteOrders {
+export const onUpdateOldOrders = /* GraphQL */ `
+  subscription OnUpdateOldOrders {
+    onUpdateOldOrders {
+      id
+      user_id
+      users {
+        user_id
+        user_name
+        user_email
+        user_number
+        createdAt
+        updatedAt
+      }
+      item_id
+      items {
+        id
+        item_img
+        item_name
+        item_price
+        item_stock
+        release_day
+        item_detail
+        createdAt
+        updatedAt
+      }
+      total_price
+      pickup_place
+      pickup_time
+      status
+      lock_flg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOldOrders = /* GraphQL */ `
+  subscription OnDeleteOldOrders {
+    onDeleteOldOrders {
       id
       user_id
       users {

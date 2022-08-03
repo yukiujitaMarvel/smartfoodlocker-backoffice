@@ -118,7 +118,7 @@
 
 <script>
 import { API, graphqlOperation} from 'aws-amplify'
-import { listOrders } from '../graphql/queries'
+import { listOldOrders } from '../graphql/queries'
 import Sidebar from '~/components/Sidebar'
 import '~/assets/css/style.css'
 
@@ -168,10 +168,10 @@ import '~/assets/css/style.css'
       async getOrders() {
         const orders = await API.graphql(
           graphqlOperation(
-            listOrders
+            listOldOrders
           )
         );
-        const orderLists = orders.data.listOrders.items;
+        const orderLists = orders.data.listOldOrders.items;
 
         this.orders = orderLists;
 
